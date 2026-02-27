@@ -15,13 +15,9 @@ git config --global --add safe.directory /workspace
 logdir="/workspace/logs/epic-runs"
 mkdir -p "$logdir"
 
-# --- Initialize beads ---
+# --- Initialize beads (JSONL-only, no Dolt server needed in container) ---
 echo "Initializing beads..."
-bd init
-bd config set beads.role maintainer
-yes | bd doctor --fix || true
-rm -f .beads/dolt/*/.dolt/noms/LOCK
-bd import
+bd init --no-db --from-jsonl
 
 # Verify the epic exists before starting
 if ! bd show "$epic" > /dev/null 2>&1; then
