@@ -15,7 +15,7 @@ log_name="$(basename "$log_file" .jsonl)"
 summary_file="$summary_dir/${log_name}.md"
 
 claude -p \
-  --allowedTools 'Read' \
+  --allowedTools 'Read' "Write($summary_dir/*)" \
   "Read the log file at $log_file. Write a concise summary covering:
 - What tasks were worked on
 - What was accomplished (files created/modified, commits)
