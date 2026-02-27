@@ -32,7 +32,7 @@ fi
 
 # --- Run agent ---
 echo "Starting agent run..."
-claude -p --dangerously-skip-permissions --verbose "$(cat <<'PROMPT'
+claude -p --dangerously-skip-permissions --verbose --output-format json "$(cat <<'PROMPT'
 Read SPEC.md to understand the project requirements.
 Run `bd list` to check for existing tasks.
 

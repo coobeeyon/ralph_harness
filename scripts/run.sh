@@ -8,7 +8,7 @@ runner_dir="$script_dir/runner"
 # --- Set up logging ---
 log_dir="$project_dir/logs"
 mkdir -p "$log_dir"
-log_file="$log_dir/run-$(date +%Y%m%d-%H%M%S).log"
+log_file="$log_dir/run-$(date +%Y%m%d-%H%M%S).jsonl"
 
 echo "Log file: $log_file"
 
@@ -60,7 +60,7 @@ docker run --name "$container_name" \
   agent-runner /run.sh 2>&1 | tee "$log_file"
 
 # Update latest symlink
-ln -sf "$(basename "$log_file")" "$log_dir/latest.log"
+ln -sf "$(basename "$log_file")" "$log_dir/latest.jsonl"
 
 echo ""
 echo "Container $container_name finished. Cleaning up..."
@@ -70,4 +70,5 @@ docker rm "$container_name"
 echo "Pulling code changes from remote..."
 git -C "$project_dir" pull --ff-only || echo "No new commits to pull."
 
-echo "Done. Log saved: $log_file"
+# --- Print run summary ---
+"$script_dir/summary.sh" "$log_file"
