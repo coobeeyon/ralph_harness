@@ -9,7 +9,7 @@ A GitHub template for autonomous AI coding agents. Docker-isolated runs, beads-b
 3. **Set up credentials**:
    ```bash
    cp .env.example .env
-   # Add your ANTHROPIC_API_KEY
+   # Add your ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN
    ```
 4. **Run the agent**:
    ```bash
@@ -30,11 +30,11 @@ scripts/run.sh
 
 ### Loop (`scripts/run-loop.sh`)
 
-Runs the agent repeatedly at a configurable interval (default: 1 hour).
+Runs the agent in a tight loop — back-to-back runs with no gap by default.
 
 ```bash
-scripts/run-loop.sh          # Every 3600s
-scripts/run-loop.sh 1800     # Every 30 min
+scripts/run-loop.sh          # No delay between runs
+scripts/run-loop.sh 300      # 5-min delay between runs
 ```
 
 ### Epic (`scripts/run-epic.sh`)
@@ -51,7 +51,7 @@ scripts/run-epic.sh <epic-id> 30           # 30-min timeout per task
 - Docker
 - Git with SSH access to your repo
 - `bd` (beads) CLI — [github.com/steveyegge/beads](https://github.com/steveyegge/beads)
-- An Anthropic API key
+- An Anthropic API key or Claude Code OAuth token
 
 ## Customization
 
