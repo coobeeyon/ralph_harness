@@ -13,6 +13,7 @@ git config --global --add safe.directory "$work_dir"
 
 # --- Initialize beads (embedded mode, no server needed) ---
 echo "Initializing beads..."
+rm -f .beads/metadata.json
 bd init --from-jsonl
 
 # --- Install pre-commit hook (beads) ---
