@@ -15,9 +15,9 @@ git config --global --add safe.directory /workspace
 logdir="/workspace/logs/epic-runs"
 mkdir -p "$logdir"
 
-# --- Initialize beads (JSONL-only, no Dolt server needed in container) ---
+# --- Initialize beads from committed JSONL ---
 echo "Initializing beads..."
-bd init --no-db --from-jsonl
+bd init --from-jsonl
 
 # Verify the epic exists before starting
 if ! bd show "$epic" > /dev/null 2>&1; then

@@ -11,9 +11,9 @@ git clone --branch "$branch" "$repo_url" "$work_dir"
 cd "$work_dir"
 git config --global --add safe.directory "$work_dir"
 
-# --- Initialize beads (JSONL-only, no Dolt server needed in container) ---
+# --- Initialize beads from committed JSONL ---
 echo "Initializing beads..."
-bd init --no-db --from-jsonl
+bd init --from-jsonl
 
 # --- Install pre-commit hook (beads) ---
 git config core.hooksPath scripts/git-hooks
