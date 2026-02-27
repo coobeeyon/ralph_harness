@@ -1,32 +1,28 @@
 #!/usr/bin/env bash
-# Print a summary of a run from its JSONL log file.
-# Usage: summary.sh <log-file>
+# Summarize the latest run log using Claude.
+# Usage: summary.sh [log-file]
+#   If no log-file given, reads logs/latest.jsonl symlink.
 set -euo pipefail
 
-log_file="${1:?Usage: summary.sh <log-file>}"
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+project_dir="$(cd "$script_dir/.." && pwd)"
+log_dir="$project_dir/logs"
+summary_dir="$log_dir/summaries"
+mkdir -p "$summary_dir"
 
-if ! command -v jq >/dev/null 2>&1; then
-  echo "Done. Log saved: $log_file"
-  exit 0
-fi
+log_file="${1:-$log_dir/latest.jsonl}"
+log_name="$(basename "$log_file" .jsonl)"
+summary_file="$summary_dir/${log_name}.md"
 
-echo "=== Run Summary ==="
-echo "Log: $log_file"
+claude -p \
+  --allowedTools 'Read' \
+  "Read the log file at $log_file. Write a concise summary covering:
+- What tasks were worked on
+- What was accomplished (files created/modified, commits)
+- Whether the run succeeded or failed (and why)
+- Any errors or notable events
 
-# Extract the final result message (last assistant text)
-result=$(grep '"result"' "$log_file" 2>/dev/null | tail -1 | jq -r '.result // empty' 2>/dev/null || true)
-if [ -n "$result" ]; then
-  echo ""
-  echo "$result"
-fi
+Write the summary to $summary_file as markdown. Also print it to stdout."
 
-# Token usage from the last stats line
-stats=$(grep '"usage"' "$log_file" 2>/dev/null | tail -1 || true)
-if [ -n "$stats" ]; then
-  input=$(echo "$stats" | jq -r '.usage.input_tokens // 0' 2>/dev/null || echo 0)
-  output=$(echo "$stats" | jq -r '.usage.output_tokens // 0' 2>/dev/null || echo 0)
-  echo ""
-  echo "Tokens: ${input} in / ${output} out"
-fi
-
-echo "=================="
+echo ""
+echo "Summary saved: $summary_file"
