@@ -3,6 +3,7 @@
 # Usage: summary.sh [log-file]
 #   If no log-file given, reads logs/latest.jsonl symlink.
 set -euo pipefail
+unset CLAUDECODE
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"

@@ -4,6 +4,7 @@
 #
 # Exit code 0 = continue, 1 = done
 set -euo pipefail
+unset CLAUDECODE
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"

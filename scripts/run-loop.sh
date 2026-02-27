@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+unset CLAUDECODE
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 delay="${1:-0}"
