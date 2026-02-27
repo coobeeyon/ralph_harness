@@ -13,8 +13,11 @@ while true; do
   echo "--- Run $run starting at $(date) ---"
   "$script_dir/run.sh" || echo "Run $run exited with status $?"
 
-  # Summary bot decides whether to continue
-  if ! "$script_dir/summary.sh"; then
+  # Summarize what happened
+  "$script_dir/summary.sh" || true
+
+  # Decide whether to continue
+  if ! "$script_dir/decide.sh"; then
     echo ""
     echo "=== Loop complete after $run runs ==="
     break
