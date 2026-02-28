@@ -12,6 +12,10 @@ summary_dir="$log_dir/summaries"
 mkdir -p "$summary_dir"
 
 log_file="${1:-$log_dir/latest.jsonl}"
+# Resolve symlink so the summary gets the real timestamped name
+if [ -L "$log_file" ]; then
+  log_file="$(cd "$(dirname "$log_file")" && realpath "$(readlink "$log_file")")"
+fi
 log_name="$(basename "$log_file" .jsonl)"
 summary_file="$summary_dir/${log_name}.md"
 
