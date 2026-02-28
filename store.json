@@ -1,4 +1,15 @@
 {
-  "items": {},
+  "items": {
+    "lb-ltlf": {
+      "id": "lb-ltlf",
+      "title": "Hello World test",
+      "description": "Verify litebrite is working end-to-end",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-02-28T18:28:39.294522394Z",
+      "updated_at": "2026-02-28T18:28:39.294522394Z"
+    }
+  },
   "deps": []
 }
