@@ -1,39 +1,18 @@
-# Agent Instructions
+# Agent Reference
 
-This project uses **lb** (litebrite) for issue tracking. Run `lb setup claude` to get started.
-
-## Quick Reference
+## lb Commands
 
 ```bash
-lb ready              # Find available work
-lb show <id>          # View issue details
-lb claim <id>         # Claim work
-lb close <id>         # Complete work
-lb sync               # Sync with git
+lb list              # See all open tasks
+lb ready             # Find available work (unblocked, unclaimed)
+lb show <id>         # View task details
+lb claim <id>        # Claim a task
+lb close <id>        # Mark task complete
+lb sync              # Sync task state with remote
 ```
 
-## Landing the Plane (Session Completion)
+## Exit Checklist
 
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
-
-**MANDATORY WORKFLOW:**
-
-1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
-3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
-   ```bash
-   git pull --rebase
-   lb sync
-   git push
-   git status  # MUST show "up to date with origin"
-   ```
-5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
-7. **Hand off** - Provide context for next session
-
-**CRITICAL RULES:**
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds
+1. `lb close <id>` — close your task
+2. `lb sync` — sync task state to remote
+3. `git push` — push code to remote

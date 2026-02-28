@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Decide whether the agent loop should continue.
-# Reads SPEC.md, litebrite state, and recent summaries.
+# Focuses on task closure: open tasks remain → continue, all closed → stop.
 #
 # Exit code 0 = continue, 1 = done
 set -euo pipefail
@@ -9,7 +9,7 @@ unset CLAUDECODE
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
 
-schema='{"type":"object","properties":{"continue":{"type":"boolean","description":"true if more work remains, false if spec is fully implemented"},"reason":{"type":"string","description":"Brief explanation of the decision"}},"required":["continue","reason"]}'
+schema='{"type":"object","properties":{"continue":{"type":"boolean","description":"true if open tasks remain, false if all tasks are closed"},"reason":{"type":"string","description":"Brief explanation of the decision"}},"required":["continue","reason"]}'
 
 output=$(cat <<EOF | claude -p \
   --model sonnet \
@@ -17,14 +17,15 @@ output=$(cat <<EOF | claude -p \
   --output-format json --json-schema "$schema"
 You are deciding whether an AI agent loop should continue or stop.
 
-Read these inputs:
-1. $project_dir/SPEC.md — the project specification
-2. Run 'lb list' to see current task state
-3. Read the latest summary from $project_dir/logs/summaries/ (if any exist)
+Run 'lb list' to see current task state.
 
-Decide:
-- continue=true if there are open tasks, unfinished spec requirements, or the agent appears stuck and should retry
-- continue=false if the spec is fully implemented and all tasks are closed
+Decision rules:
+- If there are NO tasks at all yet, continue=true (the first agent needs to create them).
+- If ANY tasks have status other than "closed", continue=true.
+- If ALL tasks are closed, continue=false.
+
+Do NOT read SPEC.md or try to evaluate whether the spec is fully implemented.
+Focus ONLY on whether open tasks remain in litebrite.
 EOF
 )
 

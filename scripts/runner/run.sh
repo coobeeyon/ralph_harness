@@ -28,15 +28,34 @@ fi
 # --- Run agent ---
 echo "Starting agent run..."
 claude -p --dangerously-skip-permissions --output-format json --model opus "$(cat <<'PROMPT'
-Read SPEC.md to understand the project requirements.
-Run `lb list` to check for existing tasks.
+You are ONE agent in a relay. Do ONE task, then stop.
 
-If tasks exist: pick one open task, implement it, commit your changes, and close it.
-If no tasks exist: read SPEC.md carefully, create an epic with child tasks, then start implementing.
+## Steps
 
-Research anything you need. Follow AGENTS.md for the Landing the Plane protocol.
-Push all changes before finishing.
+1. Read SPEC.md to understand the project.
+2. Run `lb list` to check for existing tasks.
+3. **If no tasks exist:** create an epic with child tasks from the spec, then pick ONE task.
+   **If tasks exist:** pick ONE open task.
+4. Claim the task: `lb claim <id>`
+5. Implement the task. Commit your code frequently with clear messages.
+6. When done, run these commands IN ORDER:
+   ```
+   lb close <id>
+   lb sync
+   git push
+   ```
+7. STOP. Do NOT start another task. Exit immediately.
+
+## Rules
+- ONE task per session. Not two. Not "just one more." ONE.
+- Every session ends with: lb close, lb sync, git push — in that order.
+- The next agent will continue where you left off.
 PROMPT
 )" > /tmp/agent-run.json
 
 echo "Agent run complete."
+
+# --- Belt-and-suspenders: force sync/push even if agent forgot ---
+echo "Post-agent cleanup: forcing lb sync and git push..."
+lb sync 2>/dev/null || true
+git push 2>/dev/null || true

@@ -14,6 +14,11 @@ while true; do
   echo "--- Run $run starting at $(date) ---"
   "$script_dir/run.sh" || echo "Run $run exited with status $?"
 
+  # Sync litebrite so decider sees fresh task state
+  if command -v lb >/dev/null 2>&1; then
+    lb sync 2>/dev/null || true
+  fi
+
   # Summarize what happened
   "$script_dir/summary.sh" || true
 
