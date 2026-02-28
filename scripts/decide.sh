@@ -18,14 +18,13 @@ output=$(cat <<EOF | claude -p \
 You are deciding whether an AI agent loop should continue or stop.
 
 Run 'lb list' to see current task state.
+Read $project_dir/SPEC.md and compare it against the closed tasks.
 
 Decision rules:
 - If there are NO tasks at all yet, continue=true (the first agent needs to create them).
 - If ANY tasks have status other than "closed", continue=true.
-- If ALL tasks are closed, continue=false.
-
-Do NOT read SPEC.md or try to evaluate whether the spec is fully implemented.
-Focus ONLY on whether open tasks remain in litebrite.
+- If ALL tasks are closed BUT the spec contains requirements not covered by any task, continue=true (the spec may have been updated after the initial tasks were created).
+- If ALL tasks are closed AND the spec is fully covered, continue=false.
 EOF
 )
 
