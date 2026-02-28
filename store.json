@@ -5,11 +5,10 @@
       "title": "Hello World test",
       "description": "Verify litebrite is working end-to-end",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-02-28T18:28:39.294522394Z",
-      "updated_at": "2026-02-28T18:28:49.623932383Z"
+      "updated_at": "2026-02-28T18:28:53.218399258Z"
     }
   },
   "deps": []
