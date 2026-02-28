@@ -32,19 +32,20 @@ You are ONE agent in a relay. Do ONE task, then stop.
 
 ## Steps
 
-1. Read SPEC.md to understand the project.
-2. Run `lb list` to check for existing tasks.
+1. Run `lb list` to check for existing tasks.
+2. Read SPEC.md to understand the project.
 3. **If no tasks exist:** create an epic with child tasks from the spec, then pick ONE task.
-   **If tasks exist:** pick ONE open task.
+   **If tasks exist:** pick ONE open task. Do NOT create new tasks.
 4. Claim the task: `lb claim <id>`
-5. Implement the task. Commit your code frequently with clear messages.
-6. When done, run these commands IN ORDER:
+5. Understand the existing code before changing it. Read relevant files first.
+6. Implement the task. Commit your code frequently with clear messages.
+7. When done, run these commands IN ORDER:
    ```
    lb close <id>
    lb sync
    git push
    ```
-7. STOP. Do NOT start another task. Exit immediately.
+8. STOP. Do NOT start another task. Exit immediately.
 
 ## Rules
 - ONE task per session. Not two. Not "just one more." ONE.
