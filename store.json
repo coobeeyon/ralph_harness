@@ -35,11 +35,10 @@
       "title": "Create ralph-test-13 test bed",
       "description": "Initialize a new repo at /home/mdaum/devel/coobeeyon/ralph-test-13. Copy structure from ralph-test-12 (scripts/, CLAUDE.md, SPEC.md, .env.example, .gitignore, Cargo.toml, src/, etc). This is our sandbox for testing logging changes without affecting the harness. Push to GitHub as coobeeyon/ralph-test-13.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-01T16:08:55.490550324Z",
-      "updated_at": "2026-03-01T16:29:57.562578686Z"
+      "updated_at": "2026-03-01T19:24:01.708513460Z"
     },
     "lb-kn83": {
       "id": "lb-kn83",
