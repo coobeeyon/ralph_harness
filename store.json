@@ -20,6 +20,16 @@
       "created_at": "2026-03-01T16:08:55.490550324Z",
       "updated_at": "2026-03-01T16:08:55.490550324Z"
     },
+    "lb-kn83": {
+      "id": "lb-kn83",
+      "title": "Switch claude to stream-json output format",
+      "description": "Update scripts/runner/run.sh: add --output-format stream-json to claude invocation. Remove redundant inner tee and logdir/logfile setup (container is ephemeral, host tee persists logs). Update scripts/runner/run-epic.sh: add --output-format stream-json, change per-task log extension from .log to .jsonl (keep inner tee here since multiple tasks run in one container).",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-01T16:09:04.087359020Z",
+      "updated_at": "2026-03-01T16:09:04.087359020Z"
+    },
     "lb-ltlf": {
       "id": "lb-ltlf",
       "title": "Hello World test",
@@ -49,6 +59,11 @@
     },
     {
       "from_id": "lb-pz2p",
+      "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-kn83",
       "to_id": "lb-b5ig",
       "dep_type": "parent"
     }
