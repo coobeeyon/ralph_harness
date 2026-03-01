@@ -75,10 +75,10 @@
       "title": "Create scripts/stream-fmt.ts formatter",
       "description": "Port physarum's scripts/reflect-stream-fmt.ts to scripts/stream-fmt.ts. Nearly verbatim copy — it's already generic. Handles: system/init, assistant (tool_use for Bash/Read/Edit/Write/Grep/Glob/Agent, thinking, text), user (tool_result with code block collapsing), result (done summary with cost/turns). TTY-aware colors. Suppresses noisy tools (TodoRead/Write, TaskCreate/Get/Update/List, Read). Source: /home/mdaum/devel/coobeeyon/physarum/scripts/reflect-stream-fmt.ts",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
       "created_at": "2026-03-01T16:09:00.750596837Z",
-      "updated_at": "2026-03-01T16:09:00.750596837Z"
+      "updated_at": "2026-03-01T19:24:01.719014340Z"
     },
     "lb-rl57": {
       "id": "lb-rl57",
