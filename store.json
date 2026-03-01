@@ -93,54 +93,9 @@
   },
   "deps": [
     {
-      "from_id": "lb-j4ge",
-      "to_id": "lb-b5ig",
-      "dep_type": "parent"
-    },
-    {
-      "from_id": "lb-pz2p",
-      "to_id": "lb-b5ig",
-      "dep_type": "parent"
-    },
-    {
-      "from_id": "lb-kn83",
-      "to_id": "lb-b5ig",
-      "dep_type": "parent"
-    },
-    {
       "from_id": "lb-chol",
       "to_id": "lb-b5ig",
       "dep_type": "parent"
-    },
-    {
-      "from_id": "lb-lhgt",
-      "to_id": "lb-b5ig",
-      "dep_type": "parent"
-    },
-    {
-      "from_id": "lb-rl57",
-      "to_id": "lb-b5ig",
-      "dep_type": "parent"
-    },
-    {
-      "from_id": "lb-pz2p",
-      "to_id": "lb-kn83",
-      "dep_type": "blocks"
-    },
-    {
-      "from_id": "lb-pz2p",
-      "to_id": "lb-chol",
-      "dep_type": "blocks"
-    },
-    {
-      "from_id": "lb-j4ge",
-      "to_id": "lb-pz2p",
-      "dep_type": "blocks"
-    },
-    {
-      "from_id": "lb-kn83",
-      "to_id": "lb-chol",
-      "dep_type": "blocks"
     },
     {
       "from_id": "lb-chol",
@@ -151,6 +106,51 @@
       "from_id": "lb-chol",
       "to_id": "lb-rl57",
       "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-j4ge",
+      "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-j4ge",
+      "to_id": "lb-pz2p",
+      "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-kn83",
+      "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-kn83",
+      "to_id": "lb-chol",
+      "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-lhgt",
+      "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-pz2p",
+      "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-pz2p",
+      "to_id": "lb-chol",
+      "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-pz2p",
+      "to_id": "lb-kn83",
+      "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-rl57",
+      "to_id": "lb-b5ig",
+      "dep_type": "parent"
     }
   ]
 }
