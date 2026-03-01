@@ -131,6 +131,11 @@
       "from_id": "lb-kn83",
       "to_id": "lb-chol",
       "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-chol",
+      "to_id": "lb-lhgt",
+      "dep_type": "blocks"
     }
   ]
 }
