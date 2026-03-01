@@ -16,6 +16,18 @@
 6. Commit frequently. When done, run in order: `lb close <id>`, `lb sync`, `git push`
 7. STOP. Do NOT start another task — exit and let the next agent handle it.
 
+## Self-Modification
+
+You run inside a Docker container built from `scripts/runner/Dockerfile`. This file is part of the repo — changes you commit persist across runs.
+
+**If you need a tool or dependency** (Rust, Python, a system package, etc.), don't install it at runtime. Instead, edit the Dockerfile to add it, commit, and push. The next run will rebuild the image with your changes baked in.
+
+- Add system packages to the `apt-get install` layer
+- Add new language runtimes or tools as their own layers
+- Keep layers ordered by change frequency (rarely-changing deps first)
+
+This applies to anything in the repo — you can also modify `scripts/runner/run.sh`, `.claude/settings.local.json`, or even this file if it helps future agents.
+
 ## Conventions
 
 - Use litebrite (`lb`) for all task tracking

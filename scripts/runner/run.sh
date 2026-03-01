@@ -53,6 +53,7 @@ You are ONE agent in a relay. Do ONE task, then stop.
 - Every session ends with: lb close, lb sync, git push — in that order.
 - The next agent will continue where you left off.
 - The task graph is a living document. Create, restructure, and close tasks as understanding grows.
+- Need a tool or dependency? Edit `scripts/runner/Dockerfile` instead of installing at runtime — changes you commit are baked into the next run's image.
 PROMPT
 )"
 
