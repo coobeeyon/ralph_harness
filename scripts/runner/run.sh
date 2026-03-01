@@ -11,9 +11,10 @@ git clone --branch "$branch" "$repo_url" "$work_dir"
 cd "$work_dir"
 git config --global --add safe.directory "$work_dir"
 
-# --- Initialize litebrite (detects remote branch automatically) ---
+# --- Initialize litebrite ---
 echo "Initializing litebrite..."
 lb init
+lb setup claude 2>/dev/null || true
 
 # --- Restore .claude.json from persisted backup if missing ---
 claude_config="$HOME/.claude.json"
@@ -26,12 +27,8 @@ if [ ! -f "$claude_config" ] && [ -d "$HOME/.claude/backups" ]; then
 fi
 
 # --- Run agent ---
-logdir="$work_dir/logs/runs"
-mkdir -p "$logdir"
-logfile="$logdir/run-$(date +%Y%m%d-%H%M%S).log"
-
-echo "Starting agent run... (log: $logfile)"
-claude -p --dangerously-skip-permissions --verbose --model opus "$(cat <<'PROMPT'
+echo "Starting agent run..."
+claude -p --dangerously-skip-permissions --verbose --output-format stream-json --model opus "$(cat <<'PROMPT'
 You are ONE agent in a relay. Do ONE task, then stop.
 
 ## Steps
@@ -57,7 +54,7 @@ You are ONE agent in a relay. Do ONE task, then stop.
 - The next agent will continue where you left off.
 - The task graph is a living document. Create, restructure, and close tasks as understanding grows.
 PROMPT
-)" 2>&1 | tee "$logfile"
+)"
 
 echo "Agent run complete."
 

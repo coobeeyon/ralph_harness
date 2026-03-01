@@ -5,10 +5,18 @@ script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
 runner_dir="$script_dir/runner"
 
+# --- Parse flags ---
+raw=false
+for arg in "$@"; do
+  case "$arg" in
+    --raw) raw=true ;;
+  esac
+done
+
 # --- Set up logging ---
 log_dir="$project_dir/logs"
 mkdir -p "$log_dir"
-log_file="$log_dir/run-$(date +%Y%m%d-%H%M%S).log"
+log_file="$log_dir/run-$(date +%Y%m%d-%H%M%S).jsonl"
 
 echo "Log file: $log_file"
 
@@ -21,8 +29,10 @@ fi
 repo_url="$(git -C "$project_dir" remote get-url origin)"
 branch="$(git -C "$project_dir" branch --show-current)"
 
-# --- Pre-run litebrite sync ---
+# --- Litebrite setup + sync ---
 if command -v lb >/dev/null 2>&1; then
+  lb init 2>/dev/null || true
+  lb setup claude 2>/dev/null || true
   lb sync 2>/dev/null || true
 fi
 
@@ -45,19 +55,31 @@ docker rm "$container_name" 2>/dev/null || true
 docker volume create agent-claude-home 2>/dev/null || true
 docker run --rm -v agent-claude-home:/data alpine chown "$(id -u):$(id -g)" /data
 
-docker run --name "$container_name" \
-  --env-file "$project_dir/.env" \
-  -e REPO_URL="$repo_url" \
-  -e BRANCH="$branch" \
-  -v "${SSH_AUTH_SOCK}:/ssh-agent" \
-  -e SSH_AUTH_SOCK=/ssh-agent \
-  -v "$runner_dir/run.sh:/run.sh:ro" \
-  -v "agent-claude-home:/home/runner/.claude" \
-  agent-runner /run.sh 2>&1 | tee "$log_file"
+if [ "$raw" = true ]; then
+  docker run --name "$container_name" \
+    --env-file "$project_dir/.env" \
+    -e REPO_URL="$repo_url" \
+    -e BRANCH="$branch" \
+    -v "${SSH_AUTH_SOCK}:/ssh-agent" \
+    -e SSH_AUTH_SOCK=/ssh-agent \
+    -v "$runner_dir/run.sh:/run.sh:ro" \
+    -v "agent-claude-home:/home/runner/.claude" \
+    agent-runner /run.sh 2>&1 | tee "$log_file"
+else
+  docker run --name "$container_name" \
+    --env-file "$project_dir/.env" \
+    -e REPO_URL="$repo_url" \
+    -e BRANCH="$branch" \
+    -v "${SSH_AUTH_SOCK}:/ssh-agent" \
+    -e SSH_AUTH_SOCK=/ssh-agent \
+    -v "$runner_dir/run.sh:/run.sh:ro" \
+    -v "agent-claude-home:/home/runner/.claude" \
+    agent-runner /run.sh 2>&1 | tee "$log_file" | bun run "$script_dir/stream-fmt.ts"
+fi
 
 echo ""
 echo "Container $container_name finished."
-ln -sf "$(basename "$log_file")" "$log_dir/latest.log"
+ln -sf "$(basename "$log_file")" "$log_dir/latest.jsonl"
 
 echo "Cleaning up..."
 docker rm "$container_name"

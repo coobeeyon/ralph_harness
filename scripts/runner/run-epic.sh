@@ -18,6 +18,7 @@ mkdir -p "$logdir"
 # --- Initialize litebrite ---
 echo "Initializing litebrite..."
 lb init
+lb setup claude 2>/dev/null || true
 
 # Verify the epic exists before starting
 if ! lb show "$epic" > /dev/null 2>&1; then
@@ -51,7 +52,7 @@ failures=0
 max_failures=3
 while [ "$(remaining)" -gt 0 ]; do
   task_num=$((task_num + 1))
-  logfile="$logdir/${epic}-task-${task_num}-$(date +%H%M%S).log"
+  logfile="$logdir/${epic}-task-${task_num}-$(date +%H%M%S).jsonl"
 
   echo "=== Task $task_num | $(remaining) remaining | log: $logfile ==="
 
@@ -60,7 +61,7 @@ while [ "$(remaining)" -gt 0 ]; do
     "Run 'lb list --parent $epic' to see tasks. Pick ONE open child task and complete it. Do NOT work on tasks outside this epic. Commit your changes and close the item when done. Do NOT push — the runner handles pushing." \
     --model opus \
     --dangerously-skip-permissions \
-    -p --verbose 2>&1 | tee "$logfile"
+    -p --verbose --output-format stream-json 2>&1 | tee "$logfile"
   exit_code=${PIPESTATUS[0]}
   set -e
 

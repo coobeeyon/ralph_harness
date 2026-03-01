@@ -1,4 +1,6 @@
 logs/
 .env
 *.log
+*.jsonl
+!tests/*.jsonl
 .claude/settings.local.json
