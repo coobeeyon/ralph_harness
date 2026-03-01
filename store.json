@@ -45,10 +45,10 @@
       "title": "Switch claude to stream-json output format",
       "description": "Update scripts/runner/run.sh: add --output-format stream-json to claude invocation. Remove redundant inner tee and logdir/logfile setup (container is ephemeral, host tee persists logs). Update scripts/runner/run-epic.sh: add --output-format stream-json, change per-task log extension from .log to .jsonl (keep inner tee here since multiple tasks run in one container).",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
       "created_at": "2026-03-01T16:09:04.087359020Z",
-      "updated_at": "2026-03-01T16:09:04.087359020Z"
+      "updated_at": "2026-03-01T19:24:01.728758833Z"
     },
     "lb-lhgt": {
       "id": "lb-lhgt",
