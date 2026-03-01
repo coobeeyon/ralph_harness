@@ -53,18 +53,10 @@ docker run --name "$container_name" \
   -e SSH_AUTH_SOCK=/ssh-agent \
   -v "$runner_dir/run.sh:/run.sh:ro" \
   -v "agent-claude-home:/home/runner/.claude" \
-  agent-runner /run.sh
+  agent-runner /run.sh 2>&1 | tee "$log_file"
 
 echo ""
 echo "Container $container_name finished."
-
-# Extract verbose log from container before removing it
-docker cp "$container_name:/home/runner/workspace/logs/runs/." "$log_dir/runs/" 2>/dev/null || echo "Warning: no agent log found in container"
-# Find the most recent log extracted
-latest_run=$(ls -t "$log_dir/runs/"*.log 2>/dev/null | head -1)
-if [ -n "$latest_run" ]; then
-  cp "$latest_run" "$log_file"
-fi
 ln -sf "$(basename "$log_file")" "$log_dir/latest.log"
 
 echo "Cleaning up..."

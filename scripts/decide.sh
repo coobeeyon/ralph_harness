@@ -10,22 +10,17 @@ script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
 cd "$project_dir"
 
-schema='{"type":"object","properties":{"continue":{"type":"boolean","description":"true if open tasks remain, false if all tasks are closed"},"reason":{"type":"string","description":"Brief explanation of the decision"}},"required":["continue","reason"]}'
+# Ensure lb hooks are installed so claude gets task context automatically
+lb setup claude 2>/dev/null || true
+
+schema='{"type":"object","properties":{"continue":{"type":"boolean","description":"true if the loop should continue, false if done"},"reason":{"type":"string","description":"Brief explanation of the decision"}},"required":["continue","reason"]}'
 
 output=$(cat <<EOF | claude -p \
   --model sonnet \
-  --allowedTools 'Read,Bash(lb *)' \
+  --allowedTools 'Read, Bash(git *)' \
   --output-format json --json-schema "$schema"
-You are deciding whether an AI agent loop should continue or stop.
+You are deciding whether an AI agent loop should continue or stop. The project is specified in SPEC.md. You can see in the lites what has been done and what remains to do, and you can compare this to the SPEC.md (which may have changed) in order to make your decision. Use the return field "continue" to communicate your decision
 
-Run 'lb list' to see current task state.
-Read $project_dir/SPEC.md and compare it against the closed tasks.
-
-Decision rules:
-- If there are NO tasks at all yet, continue=true (the first agent needs to create them).
-- If ANY tasks have status other than "closed", continue=true.
-- If ALL tasks are closed BUT the spec contains requirements not covered by any task, continue=true (the spec may have been updated after the initial tasks were created).
-- If ALL tasks are closed AND the spec is fully covered, continue=false.
 EOF
 )
 
