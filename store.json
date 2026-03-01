@@ -121,6 +121,11 @@
       "from_id": "lb-pz2p",
       "to_id": "lb-chol",
       "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-j4ge",
+      "to_id": "lb-pz2p",
+      "dep_type": "blocks"
     }
   ]
 }
