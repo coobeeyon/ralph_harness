@@ -8,12 +8,13 @@ unset CLAUDECODE
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
+cd "$project_dir"
 
 schema='{"type":"object","properties":{"continue":{"type":"boolean","description":"true if open tasks remain, false if all tasks are closed"},"reason":{"type":"string","description":"Brief explanation of the decision"}},"required":["continue","reason"]}'
 
 output=$(cat <<EOF | claude -p \
   --model sonnet \
-  --allowedTools 'Read,Bash(lb list*),Bash(lb show*)' \
+  --allowedTools 'Read,Bash(lb *)' \
   --output-format json --json-schema "$schema"
 You are deciding whether an AI agent loop should continue or stop.
 
