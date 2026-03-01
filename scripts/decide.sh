@@ -9,18 +9,24 @@ unset CLAUDECODE
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 project_dir="$(cd "$script_dir/.." && pwd)"
 
+# Gather state upfront so the decider doesn't need tool access
+task_state=$(cd "$project_dir" && lb list --all 2>/dev/null || echo "NO TASKS FOUND")
+spec_contents=$(cat "$project_dir/SPEC.md" 2>/dev/null || echo "NO SPEC FOUND")
+
 schema='{"type":"object","properties":{"continue":{"type":"boolean","description":"true if open tasks remain, false if all tasks are closed"},"reason":{"type":"string","description":"Brief explanation of the decision"}},"required":["continue","reason"]}'
 
 output=$(cat <<EOF | claude -p \
   --model sonnet \
-  --allowedTools 'Read,Bash(lb list*),Bash(lb show*)' \
   --output-format json --json-schema "$schema"
 You are deciding whether an AI agent loop should continue or stop.
 
-Run 'lb list' to see current task state.
-Read $project_dir/SPEC.md and compare it against the closed tasks.
+## Current task state (from lb list --all):
+$task_state
 
-Decision rules:
+## Project spec (SPEC.md):
+$spec_contents
+
+## Decision rules:
 - If there are NO tasks at all yet, continue=true (the first agent needs to create them).
 - If ANY tasks have status other than "closed", continue=true.
 - If ALL tasks are closed BUT the spec contains requirements not covered by any task, continue=true (the spec may have been updated after the initial tasks were created).
