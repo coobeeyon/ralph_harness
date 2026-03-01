@@ -69,6 +69,16 @@
       "priority": 1,
       "created_at": "2026-03-01T16:09:00.750596837Z",
       "updated_at": "2026-03-01T16:09:00.750596837Z"
+    },
+    "lb-rl57": {
+      "id": "lb-rl57",
+      "title": "Create test fixtures and verify formatter",
+      "description": "Create tests/sample.jsonl with representative stream-json events (init, assistant with tool calls + thinking, user with tool results, result with cost/turns). Verify: 1) cat tests/sample.jsonl | bun scripts/stream-fmt.ts shows formatted output 2) echo 'plain text' passes through unchanged 3) --raw mode works. This validates the pipeline without running claude-under-claude.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-01T16:09:14.206198679Z",
+      "updated_at": "2026-03-01T16:09:14.206198679Z"
     }
   },
   "deps": [
@@ -94,6 +104,11 @@
     },
     {
       "from_id": "lb-lhgt",
+      "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-rl57",
       "to_id": "lb-b5ig",
       "dep_type": "parent"
     }
