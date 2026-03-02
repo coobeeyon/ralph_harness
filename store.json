@@ -155,11 +155,10 @@
       "title": "Test init script end-to-end",
       "description": "Test scripts/init.sh against repos with various states: (1) empty repo with no existing files, (2) repo with existing CLAUDE.md, .gitignore, and .claude/settings.local.json, (3) run init twice to verify idempotency — second run should not duplicate content. Verify that scripts/run.sh works from the initialized repo afterward.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-02T15:19:05.249317334Z",
-      "updated_at": "2026-03-02T15:55:55.199255649Z"
+      "updated_at": "2026-03-02T15:57:28.877932421Z"
     },
     "lb-pwdo": {
       "id": "lb-pwdo",
