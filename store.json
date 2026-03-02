@@ -85,11 +85,10 @@
       "title": "Update scripts/run.sh for external mode",
       "description": "Source scripts/lib.sh. Accept optional project name as first non-flag argument. In external mode: use RALPH_REPO_URL/RALPH_BRANCH instead of git remote, run preflight checks against RALPH_LOCAL_PATH, use RALPH_LOG_DIR for logs, use RALPH_ENV_FILE for --env-file, use RALPH_VOLUME for Docker volume name, mount overlay directory into container (-v \"$overlay_dir:/overlay:ro\"), post-run: docker cp container:/workspace/.harness/Dockerfile to projects/<name>/Dockerfile if changed (before docker rm), pull into RALPH_LOCAL_PATH. Template mode (no project arg) must work identically to today.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 3,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-02T15:19:27.430139960Z",
-      "updated_at": "2026-03-02T15:47:37.631384875Z"
+      "updated_at": "2026-03-02T15:50:04.315787872Z"
     },
     "lb-h3ux": {
       "id": "lb-h3ux",
