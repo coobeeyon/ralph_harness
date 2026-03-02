@@ -3,16 +3,37 @@ set -euo pipefail
 unset CLAUDECODE
 
 script_dir="$(cd "$(dirname "$0")" && pwd)"
-delay="${1:-0}"
-run=0
+
+# --- Parse args ---
+delay=0
+project_name=""
+for arg in "$@"; do
+  case "$arg" in
+    --delay) shift; delay="${1:-0}" ;;
+    --delay=*) delay="${arg#*--delay=}" ;;
+    *) [ -z "$project_name" ] && project_name="$arg" ;;
+  esac
+done
+
+# Build args to pass through
+run_args=()
+decide_args=()
+if [ -n "$project_name" ]; then
+  run_args+=("$project_name")
+  decide_args+=("$project_name")
+fi
 
 echo "=== Agent loop (${delay}s between runs, Ctrl-C to stop) ==="
+if [ -n "$project_name" ]; then
+  echo "Project: $project_name"
+fi
 
+run=0
 while true; do
   run=$((run + 1))
   echo ""
   echo "--- Run $run starting at $(date) ---"
-  "$script_dir/run.sh" || echo "Run $run exited with status $?"
+  "$script_dir/run.sh" "${run_args[@]}" || echo "Run $run exited with status $?"
 
   # Sync litebrite so decider sees fresh task state
   if command -v lb >/dev/null 2>&1; then
@@ -23,7 +44,7 @@ while true; do
   "$script_dir/summary.sh" || true
 
   # Decide whether to continue
-  if ! "$script_dir/decide.sh"; then
+  if ! "$script_dir/decide.sh" "${decide_args[@]}"; then
     echo ""
     echo "=== Loop complete after $run runs ==="
     break
