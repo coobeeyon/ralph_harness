@@ -95,10 +95,10 @@
       "title": "Init script — adopt harness into existing repo",
       "description": "An init.sh script that copies harness files into an existing repo, handling conflicts with existing CLAUDE.md, .gitignore, and .claude/settings.local.json. Run as: scripts/init.sh /path/to/existing-repo. End state is identical to having used the GitHub template.",
       "item_type": "epic",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
       "created_at": "2026-03-02T15:18:45.045257003Z",
-      "updated_at": "2026-03-02T15:18:45.045257003Z"
+      "updated_at": "2026-03-02T15:57:40.789990965Z"
     },
     "lb-iizd": {
       "id": "lb-iizd",
