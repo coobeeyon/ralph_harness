@@ -1,5 +1,15 @@
 {
   "items": {
+    "lb-1n9x": {
+      "id": "lb-1n9x",
+      "title": "Create scripts/init.sh — core init script",
+      "description": "Create scripts/init.sh that copies harness files into an existing repo. Accepts target repo path as argument. Steps: (1) validate target is a git repo, (2) copy scripts/ directory, (3) copy AGENTS.md, (4) copy .env.example, (5) create SPEC.md from template if absent, (6) merge .gitignore entries (append harness entries not already present: logs/, .env, *.log, *.jsonl, !tests/*.jsonl, .claude/settings.local.json), (7) merge CLAUDE.md (append harness sections under <!-- ralph-harness-start/end --> markers, skip if markers already present for idempotency), (8) merge .claude/settings.local.json (union permissions.allow arrays, merge hooks objects), (9) print summary of actions taken.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-02T15:19:02.773545581Z",
+      "updated_at": "2026-03-02T15:19:02.773545581Z"
+    },
     "lb-b5ig": {
       "id": "lb-b5ig",
       "title": "Structured JSONL logging with live stream formatter",
@@ -170,6 +180,11 @@
     {
       "from_id": "lb-rl57",
       "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-1n9x",
+      "to_id": "lb-h3ux",
       "dep_type": "parent"
     }
   ]
