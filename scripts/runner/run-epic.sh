@@ -12,6 +12,22 @@ git clone --branch "$branch" "$repo_url" /workspace
 cd /workspace
 git config --global --add safe.directory /workspace
 
+# --- Apply overlay files (external mode) ---
+if [ -d /overlay ]; then
+  echo "Applying overlay files..."
+  [ -f /overlay/CLAUDE.md ] && [ ! -f /workspace/CLAUDE.md ] && cp /overlay/CLAUDE.md /workspace/CLAUDE.md
+  [ -f /overlay/AGENTS.md ] && [ ! -f /workspace/AGENTS.md ] && cp /overlay/AGENTS.md /workspace/AGENTS.md
+  [ -f /overlay/SPEC.md ] && [ ! -f /workspace/SPEC.md ] && cp /overlay/SPEC.md /workspace/SPEC.md
+  if [ -f /overlay/claude-settings.json ] && [ ! -f /workspace/.claude/settings.local.json ]; then
+    mkdir -p /workspace/.claude
+    cp /overlay/claude-settings.json /workspace/.claude/settings.local.json
+  fi
+  if [ -f /overlay/Dockerfile ]; then
+    mkdir -p /workspace/.harness
+    cp /overlay/Dockerfile /workspace/.harness/Dockerfile
+  fi
+fi
+
 logdir="/workspace/logs/epic-runs"
 mkdir -p "$logdir"
 

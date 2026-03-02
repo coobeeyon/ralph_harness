@@ -11,6 +11,22 @@ git clone --branch "$branch" "$repo_url" "$work_dir"
 cd "$work_dir"
 git config --global --add safe.directory "$work_dir"
 
+# --- Apply overlay files (external mode) ---
+if [ -d /overlay ]; then
+  echo "Applying overlay files..."
+  [ -f /overlay/CLAUDE.md ] && [ ! -f "$work_dir/CLAUDE.md" ] && cp /overlay/CLAUDE.md "$work_dir/CLAUDE.md"
+  [ -f /overlay/AGENTS.md ] && [ ! -f "$work_dir/AGENTS.md" ] && cp /overlay/AGENTS.md "$work_dir/AGENTS.md"
+  [ -f /overlay/SPEC.md ] && [ ! -f "$work_dir/SPEC.md" ] && cp /overlay/SPEC.md "$work_dir/SPEC.md"
+  if [ -f /overlay/claude-settings.json ] && [ ! -f "$work_dir/.claude/settings.local.json" ]; then
+    mkdir -p "$work_dir/.claude"
+    cp /overlay/claude-settings.json "$work_dir/.claude/settings.local.json"
+  fi
+  if [ -f /overlay/Dockerfile ]; then
+    mkdir -p "$work_dir/.harness"
+    cp /overlay/Dockerfile "$work_dir/.harness/Dockerfile"
+  fi
+fi
+
 # --- Initialize litebrite ---
 echo "Initializing litebrite..."
 lb init
