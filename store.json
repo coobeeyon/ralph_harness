@@ -5,11 +5,10 @@
       "title": "Create defaults/ directory with default agent config",
       "description": "Create defaults/ directory with default agent config files for external mode: (1) defaults/CLAUDE.md — copy of root CLAUDE.md but self-modification section references .harness/Dockerfile instead of scripts/runner/Dockerfile, (2) defaults/AGENTS.md — copy of root AGENTS.md, (3) defaults/claude-settings.json — copy of .claude/settings.local.json. Also create project.conf.example with documented fields: REPO_URL, BRANCH, LOCAL_PATH.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-02T15:19:18.049400177Z",
-      "updated_at": "2026-03-02T15:28:18.777482526Z"
+      "updated_at": "2026-03-02T15:34:33.262239935Z"
     },
     "lb-1n9x": {
       "id": "lb-1n9x",
