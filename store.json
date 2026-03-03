@@ -55,11 +55,10 @@
       "title": "Rewrite README with docs for all 3 modes",
       "description": "Full rewrite of README.md to document template mode, external mode, and init mode. Include prerequisites, running the agent, how it works, and complete file table.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-03T22:16:04.055414244Z",
-      "updated_at": "2026-03-03T22:16:07.867596094Z"
+      "updated_at": "2026-03-03T22:21:49.704022397Z"
     },
     "lb-b2bb": {
       "id": "lb-b2bb",
