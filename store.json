@@ -85,11 +85,10 @@
       "title": "Fix init.sh: properly merge hooks instead of skipping",
       "description": "MEDIUM BUG: scripts/init.sh hook merging is incomplete. If the target repo already has a PreCompact or SessionStart hook, the harness's lb prime hook is silently dropped. Instead, the merge should append harness hooks to existing hook arrays for each event key. Use jq to merge the arrays rather than skipping if the key exists.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-03T14:09:50.216610269Z",
-      "updated_at": "2026-03-03T14:27:08.186519424Z"
+      "updated_at": "2026-03-03T14:32:40.892954278Z"
     },
     "lb-g4rj": {
       "id": "lb-g4rj",
