@@ -70,7 +70,7 @@ else
   {
     echo ""
     echo "$harness_marker_start"
-    cat "$harness_dir/CLAUDE.md"
+    cat "$harness_dir/defaults/CLAUDE.md"
     echo "$harness_marker_end"
   } >> "$target/CLAUDE.md"
   add_summary "Appended harness sections to CLAUDE.md"
