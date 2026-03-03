@@ -245,11 +245,10 @@
       "title": "End-to-end test: external/stealth mode against a real repo",
       "description": "Test external mode properly: (1) Create a test repo on GitHub (or use an existing throwaway). (2) Create projects/test-project/project.conf pointing at it with REPO_URL, BRANCH, LOCAL_PATH. (3) Create projects/test-project/SPEC.md with a trivial task. (4) Run scripts/run.sh test-project. (5) Verify: correct repo is cloned in container, overlay files appear in workspace, agent can read SPEC.md and use litebrite, no harness files are committed to target repo, logs land in projects/test-project/logs/. (6) Also run scripts/run.sh with no args and verify template mode still works identically. Clean up test project config afterward.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-03T14:10:08.170973578Z",
-      "updated_at": "2026-03-03T15:30:44.808978342Z"
+      "updated_at": "2026-03-03T15:35:30.225225040Z"
     }
   },
   "deps": [
