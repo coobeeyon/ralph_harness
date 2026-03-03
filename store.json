@@ -10,6 +10,16 @@
       "created_at": "2026-03-02T15:19:18.049400177Z",
       "updated_at": "2026-03-02T15:34:33.262239935Z"
     },
+    "lb-0gof": {
+      "id": "lb-0gof",
+      "title": "End-to-end test: init.sh against a real repo",
+      "description": "Test scripts/init.sh properly: (1) Create a temporary test repo with an existing CLAUDE.md, .gitignore, and .claude/settings.local.json with existing hooks. (2) Run init.sh against it. (3) Verify: CLAUDE.md has harness sections with correct .harness/Dockerfile reference, .gitignore has harness entries without duplicates, settings.local.json has merged permissions AND merged hooks (lb prime alongside existing hooks). (4) Run init.sh again — verify idempotency (no duplicated content). (5) Verify scripts/run.sh works from the initialized repo (at least the preflight/setup portion). Clean up test repo afterward.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-03T14:09:57.088472075Z",
+      "updated_at": "2026-03-03T14:09:57.088472075Z"
+    },
     "lb-1n9x": {
       "id": "lb-1n9x",
       "title": "Create scripts/init.sh — core init script",
@@ -374,6 +384,11 @@
     },
     {
       "from_id": "lb-wmho",
+      "to_id": "lb-h8k7",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-0gof",
       "to_id": "lb-h8k7",
       "dep_type": "parent"
     }
