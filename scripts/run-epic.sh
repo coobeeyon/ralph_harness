@@ -83,7 +83,7 @@ ln -sf "$(basename "$log_file")" "$RALPH_LOG_DIR/latest.jsonl"
 # --- Extract updated Dockerfile from container (external mode) ---
 if [ "$RALPH_MODE" = "external" ]; then
   echo "Checking for updated Dockerfile..."
-  docker cp "$container_name:/workspace/.harness/Dockerfile" "$RALPH_PROJECT_DIR/Dockerfile" 2>/dev/null || true
+  docker cp "$container_name:/home/runner/workspace/.harness/Dockerfile" "$RALPH_PROJECT_DIR/Dockerfile" 2>/dev/null || true
 fi
 
 echo "Cleaning up..."

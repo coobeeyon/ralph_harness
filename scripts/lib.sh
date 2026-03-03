@@ -109,14 +109,3 @@ build_overlay_dir() {
 
   echo "$overlay_dir"
 }
-
-# docker_volume_args
-#
-# Prints docker volume/mount arguments appropriate for the current mode.
-# In template mode: no extra mounts (container clones from remote).
-# In external mode with LOCAL_PATH: bind-mounts the local repo.
-docker_volume_args() {
-  if [ "$RALPH_MODE" = "external" ] && [ -n "$RALPH_LOCAL_PATH" ]; then
-    echo "-v $RALPH_LOCAL_PATH:/home/runner/workspace"
-  fi
-}

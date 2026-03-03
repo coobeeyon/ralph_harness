@@ -5,30 +5,31 @@ epic="${1:?Usage: run-epic.sh <epic-id> [timeout-minutes]}"
 timeout_mins="${2:-15}"
 repo_url="${REPO_URL:?REPO_URL required}"
 branch="${BRANCH:?BRANCH required}"
+work_dir="$HOME/workspace"
 
 # --- Clone and set up ---
 echo "Cloning $repo_url (branch: $branch)..."
-git clone --branch "$branch" "$repo_url" /workspace
-cd /workspace
-git config --global --add safe.directory /workspace
+git clone --branch "$branch" "$repo_url" "$work_dir"
+cd "$work_dir"
+git config --global --add safe.directory "$work_dir"
 
 # --- Apply overlay files (external mode) ---
 if [ -d /overlay ]; then
   echo "Applying overlay files..."
-  [ -f /overlay/CLAUDE.md ] && [ ! -f /workspace/CLAUDE.md ] && cp /overlay/CLAUDE.md /workspace/CLAUDE.md
-  [ -f /overlay/AGENTS.md ] && [ ! -f /workspace/AGENTS.md ] && cp /overlay/AGENTS.md /workspace/AGENTS.md
-  [ -f /overlay/SPEC.md ] && [ ! -f /workspace/SPEC.md ] && cp /overlay/SPEC.md /workspace/SPEC.md
-  if [ -f /overlay/claude-settings.json ] && [ ! -f /workspace/.claude/settings.local.json ]; then
-    mkdir -p /workspace/.claude
-    cp /overlay/claude-settings.json /workspace/.claude/settings.local.json
+  [ -f /overlay/CLAUDE.md ] && [ ! -f "$work_dir/CLAUDE.md" ] && cp /overlay/CLAUDE.md "$work_dir/CLAUDE.md"
+  [ -f /overlay/AGENTS.md ] && [ ! -f "$work_dir/AGENTS.md" ] && cp /overlay/AGENTS.md "$work_dir/AGENTS.md"
+  [ -f /overlay/SPEC.md ] && [ ! -f "$work_dir/SPEC.md" ] && cp /overlay/SPEC.md "$work_dir/SPEC.md"
+  if [ -f /overlay/claude-settings.json ] && [ ! -f "$work_dir/.claude/settings.local.json" ]; then
+    mkdir -p "$work_dir/.claude"
+    cp /overlay/claude-settings.json "$work_dir/.claude/settings.local.json"
   fi
   if [ -f /overlay/Dockerfile ]; then
-    mkdir -p /workspace/.harness
-    cp /overlay/Dockerfile /workspace/.harness/Dockerfile
+    mkdir -p "$work_dir/.harness"
+    cp /overlay/Dockerfile "$work_dir/.harness/Dockerfile"
   fi
 fi
 
-logdir="/workspace/logs/epic-runs"
+logdir="$work_dir/logs/epic-runs"
 mkdir -p "$logdir"
 
 # --- Initialize litebrite ---

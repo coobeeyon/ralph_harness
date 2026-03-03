@@ -27,7 +27,6 @@ RUN userdel -r node 2>/dev/null || true && \
     groupadd -g ${HOST_GID} runner 2>/dev/null || true && \
     useradd -m -s /bin/bash -u ${HOST_UID} -g ${HOST_GID} runner && \
     echo "runner ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/runner && \
-    mkdir -p /workspace && chown runner:runner /workspace && \
     cp -r /root/.ssh /home/runner/.ssh && \
     chown -R runner:runner /home/runner/.ssh
 USER runner
