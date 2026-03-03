@@ -104,7 +104,16 @@ else
     if (h.hooks) {
       if (!t.hooks) t.hooks = {};
       Object.keys(h.hooks).forEach(function(ev) {
-        if (!t.hooks[ev]) t.hooks[ev] = h.hooks[ev];
+        if (!t.hooks[ev]) {
+          t.hooks[ev] = h.hooks[ev];
+        } else {
+          var existingSet = new Set(t.hooks[ev].map(function(e) { return JSON.stringify(e); }));
+          h.hooks[ev].forEach(function(entry) {
+            if (!existingSet.has(JSON.stringify(entry))) {
+              t.hooks[ev].push(entry);
+            }
+          });
+        }
       });
     }
     fs.writeFileSync(process.argv[1], JSON.stringify(t, null, 2) + "\n");
