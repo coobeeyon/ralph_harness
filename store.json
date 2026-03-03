@@ -140,6 +140,16 @@
       "created_at": "2026-03-01T16:09:04.087359020Z",
       "updated_at": "2026-03-01T19:24:01.728758833Z"
     },
+    "lb-l7ra": {
+      "id": "lb-l7ra",
+      "title": "Fix init.sh: append defaults/CLAUDE.md instead of root CLAUDE.md",
+      "description": "CRITICAL BUG: scripts/init.sh appends the root CLAUDE.md which tells agents to edit scripts/runner/Dockerfile. It should append defaults/CLAUDE.md which correctly references .harness/Dockerfile for external mode repos. Find the line that does 'cat \"$harness_dir/CLAUDE.md\"' and change it to 'cat \"$harness_dir/defaults/CLAUDE.md\"'. Verify by reading both files and confirming the self-modification section differs.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-03T14:09:47.668522069Z",
+      "updated_at": "2026-03-03T14:09:47.668522069Z"
+    },
     "lb-lhgt": {
       "id": "lb-lhgt",
       "title": "Update summary.sh and .gitignore for JSONL",
@@ -330,6 +340,11 @@
     {
       "from_id": "lb-rl57",
       "to_id": "lb-b5ig",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-l7ra",
+      "to_id": "lb-h8k7",
       "dep_type": "parent"
     }
   ]
