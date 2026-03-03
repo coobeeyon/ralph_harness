@@ -235,11 +235,10 @@
       "title": "Remove dead code and fix path inconsistency",
       "description": "Two cleanup items: (1) Remove the unused docker_volume_args() function from scripts/lib.sh — it's never called, the logic is inline in run.sh and run-epic.sh. (2) Fix path inconsistency in scripts/runner/run-epic.sh — it hardcodes /workspace while scripts/runner/run.sh uses $HOME/workspace. Make them consistent.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 3,
-      "claimed_by": "Mike Daum",
       "created_at": "2026-03-03T14:09:52.559346650Z",
-      "updated_at": "2026-03-03T14:50:54.267110209Z"
+      "updated_at": "2026-03-03T15:27:37.823887360Z"
     },
     "lb-xn4d": {
       "id": "lb-xn4d",
