@@ -245,11 +245,10 @@
       "title": "Summary subcommand is still a stub",
       "description": "main.rs line 151-153: Commands::Summary just prints 'not implemented yet'. Needs actual implementation — read log file, call claude CLI with haiku model, write markdown summary. The loop_cmd.rs generate_summary() already has most of this logic and could be extracted.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T20:48:05.934410036Z",
-      "updated_at": "2026-03-06T21:04:30.857427417Z"
+      "updated_at": "2026-03-06T21:05:47.912724885Z"
     },
     "lb-kn83": {
       "id": "lb-kn83",
