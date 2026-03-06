@@ -110,6 +110,16 @@
       "created_at": "2026-03-03T14:09:50.216610269Z",
       "updated_at": "2026-03-03T14:32:40.892954278Z"
     },
+    "lb-fdtj": {
+      "id": "lb-fdtj",
+      "title": "Simplify runner/run.sh to template-only",
+      "description": "Remove the /overlay conditional block that copies CLAUDE.md, AGENTS.md, SPEC.md, claude-settings.json, and Dockerfile into the workspace. In template mode the repo already has these files, so the overlay logic is unnecessary.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:23.891791188Z",
+      "updated_at": "2026-03-06T19:55:23.891791188Z"
+    },
     "lb-g4rj": {
       "id": "lb-g4rj",
       "title": "Teach agent it can self-modify (Dockerfile, deps) across loop iterations",
@@ -494,6 +504,11 @@
     },
     {
       "from_id": "lb-q71j",
+      "to_id": "lb-pggs",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-fdtj",
       "to_id": "lb-pggs",
       "dep_type": "parent"
     }
