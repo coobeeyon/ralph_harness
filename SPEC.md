@@ -34,7 +34,7 @@ Run one agent session. This is the core command — everything else builds on it
 - `--raw` — output raw JSONL instead of formatted stream
 - `--model <model>` — override the Claude model (default: from config or `opus`)
 - `--timeout <minutes>` — kill container after N minutes
-- `--local` — bind-mount current directory instead of cloning (skips push/pull)
+- `--local` — bind-mount current directory instead of cloning (see Local/Bootstrap Mode below)
 
 ### `mrmouth loop`
 
@@ -174,6 +174,37 @@ The agent prompt is embedded in the binary but can be overridden by placing a `p
 6. Host pulls changes and syncs litebrite
 
 Persistent state: A Docker volume persists `~/.claude` across runs, so Claude Code retains memory about the project.
+
+## Local/Bootstrap Mode
+
+`mrmouth run --local` bind-mounts the current directory into the container instead of cloning. This changes several behaviors:
+
+**What's different in local mode:**
+
+- The current directory is mounted at `/home/runner/workspace` — the agent works directly on your files
+- No `git clone` inside the container (the runner script detects an existing `.git` and skips cloning)
+- No `git pull` after the container exits (changes are already on disk)
+- No remote is required — the repo can have no `origin` configured, or not be a git repo at all
+- Preflight skips the clean-working-tree check (the whole point is to work on local state)
+- The agent still runs inside Docker — same sandboxing, same `--dangerously-skip-permissions`
+
+**Bootstrap workflow:**
+
+Local mode enables bootstrapping a brand new project:
+
+1. `mkdir my-project && cd my-project`
+2. `mrmouth run --local` — agent runs in an empty directory, can `git init`, write SPEC.md, create initial structure
+3. Set up a remote: `git remote add origin ...` and `git push -u origin main`
+4. `mrmouth run` — now uses the normal clone-based flow
+
+This also works for adopting mrmouth in an existing repo that doesn't have `.mrmouth/` config yet — local mode doesn't require config to exist.
+
+**Implementation notes:**
+
+- `Config::find_repo_root()` must handle the case where there's no `.git` directory. In local mode, fall back to the current working directory.
+- `run.rs` must not call `git_remote_url()` when `--local` is set — there may be no remote.
+- Preflight must skip the dirty-tree check when `--local` is set.
+- The runner entrypoint script already handles this: it checks `[ ! -d "$work_dir/.git" ]` before cloning.
 
 ## Stream Formatter
 
