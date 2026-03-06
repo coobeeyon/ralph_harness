@@ -9,15 +9,7 @@ unset CLAUDECODE
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 source "$script_dir/lib.sh"
 
-# Accept optional project name
-resolve_project "${1:-}"
-
-# cd to the appropriate directory so lb and SPEC.md access work
-if [ "$RALPH_MODE" = "external" ] && [ -n "$RALPH_LOCAL_PATH" ]; then
-  cd "$RALPH_LOCAL_PATH"
-else
-  cd "$RALPH_HARNESS_DIR"
-fi
+cd "$RALPH_HARNESS_DIR"
 
 # Ensure lb hooks are installed so claude gets task context automatically
 lb setup claude 2>/dev/null || true
