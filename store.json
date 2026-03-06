@@ -145,11 +145,10 @@
       "title": "Migrate mrmouth/ to its own repo",
       "description": "Once Mr Mouth is functional, move mrmouth/ out of ralph_harness into coobeeyon/mrmouth (https://github.com/coobeeyon/mrmouth — repo already created, empty). Set up CI, GitHub releases, and cargo publish there. The ralph_harness repo can be archived or kept as a lightweight bash-only alternative.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T21:29:26.923285393Z",
-      "updated_at": "2026-03-06T22:50:58.380298074Z"
+      "updated_at": "2026-03-06T22:52:24.763996138Z"
     },
     "lb-chol": {
       "id": "lb-chol",
