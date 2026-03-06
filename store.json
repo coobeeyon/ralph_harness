@@ -100,6 +100,16 @@
       "created_at": "2026-03-06T19:55:56.696106661Z",
       "updated_at": "2026-03-06T20:21:56.046642925Z"
     },
+    "lb-8v63": {
+      "id": "lb-8v63",
+      "title": "run.rs preflight should skip dirty-tree check in --local mode",
+      "description": "run.rs preflight() always checks for a clean working tree (line 157-166). But in --local mode you're bind-mounting the working directory — the agent is meant to work on it directly. Requiring a clean tree defeats the purpose of local mode, especially for bootstrap where there may be uncommitted scaffolding.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T20:48:36.138712755Z",
+      "updated_at": "2026-03-06T20:48:36.138712755Z"
+    },
     "lb-9k17": {
       "id": "lb-9k17",
       "title": "Rewrite README with docs for all 3 modes",
@@ -789,6 +799,11 @@
     },
     {
       "from_id": "lb-o7ca",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-8v63",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
