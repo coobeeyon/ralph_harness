@@ -1,4 +1,7 @@
 mod config;
+mod docker;
+mod prompt;
+mod run;
 pub mod stream_fmt;
 
 use clap::{Parser, Subcommand};
@@ -98,10 +101,16 @@ fn main() {
 
     match cli.command {
         Commands::Run { raw, model, timeout, local } => {
-            let model = model.unwrap_or(config.model);
-            eprintln!("mrmouth run: not implemented yet");
-            eprintln!("  raw={raw}, model={model}, timeout={timeout:?}, local={local}");
-            eprintln!("  image={}, dockerfile={}", config.image, config.dockerfile);
+            let opts = run::RunOptions {
+                raw,
+                model: model.unwrap_or_else(|| config.model.clone()),
+                timeout,
+                local,
+            };
+            if let Err(e) = run::execute(&config, &repo_root, opts) {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
         }
         Commands::Loop { delay, max_runs, no_summary } => {
             let delay = if delay > 0 { delay } else { config.loop_config.delay };
