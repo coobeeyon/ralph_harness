@@ -30,6 +30,16 @@
       "created_at": "2026-03-02T15:19:02.773545581Z",
       "updated_at": "2026-03-02T15:45:24.919590776Z"
     },
+    "lb-1nv7": {
+      "id": "lb-1nv7",
+      "title": "Implement 'ralph init' — scaffold config in a repo",
+      "description": "Create .ralph/config.toml with sensible defaults, optionally create .ralph/Dockerfile, add .ralph/ entries to .gitignore. Much simpler than the old init.sh — just creates config, doesn't copy scripts.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:56:10.264666672Z",
+      "updated_at": "2026-03-06T19:56:10.264666672Z"
+    },
     "lb-3ocz": {
       "id": "lb-3ocz",
       "title": "Update .gitignore and end-to-end test",
@@ -644,6 +654,11 @@
     },
     {
       "from_id": "lb-46sk",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-1nv7",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
