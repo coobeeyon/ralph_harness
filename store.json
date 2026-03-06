@@ -60,6 +60,16 @@
       "created_at": "2026-03-02T15:19:22.867751861Z",
       "updated_at": "2026-03-02T15:47:23.603382421Z"
     },
+    "lb-5um2": {
+      "id": "lb-5um2",
+      "title": "Implement 'ralph run' — core agent session",
+      "description": "The main command. Build Docker image (shell out to docker CLI), run container with repo mounted or cloned, stream output with formatting, handle log capture, pull changes after agent exits. Port the essential logic from the current bash run.sh + runner/run.sh.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:52.822379112Z",
+      "updated_at": "2026-03-06T19:55:52.822379112Z"
+    },
     "lb-9k17": {
       "id": "lb-9k17",
       "title": "Rewrite README with docs for all 3 modes",
@@ -584,6 +594,11 @@
     },
     {
       "from_id": "lb-n8qx",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-5um2",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
