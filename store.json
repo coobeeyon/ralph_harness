@@ -480,6 +480,16 @@
       "created_at": "2026-03-03T14:10:08.170973578Z",
       "updated_at": "2026-03-03T15:35:30.225225040Z"
     },
+    "lb-ybur": {
+      "id": "lb-ybur",
+      "title": "atty crate is deprecated — use std::io::IsTerminal",
+      "description": "run.rs uses atty::is() (line 81) for TTY detection. The atty crate is deprecated in favor of std::io::IsTerminal which landed in Rust 1.70. Since we target stable Rust this should be a straightforward swap — removes a dependency.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 3,
+      "created_at": "2026-03-06T20:48:56.541609509Z",
+      "updated_at": "2026-03-06T20:48:56.541609509Z"
+    },
     "lb-yhld": {
       "id": "lb-yhld",
       "title": "Fix prompt.rs Dockerfile reference",
@@ -834,6 +844,11 @@
     },
     {
       "from_id": "lb-xahc",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-ybur",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
