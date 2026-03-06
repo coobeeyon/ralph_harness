@@ -40,15 +40,18 @@ while true; do
     lb sync 2>/dev/null || true
   fi
 
-  # Summarize what happened
-  "$script_dir/summary.sh" || true
+  # Summarize and decide in parallel
+  "$script_dir/summary.sh" &
+  summary_pid=$!
 
-  # Decide whether to continue
   if ! "$script_dir/decide.sh" "${decide_args[@]}"; then
+    wait "$summary_pid" 2>/dev/null || true
     echo ""
     echo "=== Loop complete after $run runs ==="
     break
   fi
+
+  wait "$summary_pid" 2>/dev/null || true
 
   if [ "$delay" -gt 0 ]; then
     echo ""
