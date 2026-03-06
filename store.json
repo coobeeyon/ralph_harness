@@ -275,11 +275,10 @@
       "title": "Implement config loading from .mrmouth/",
       "description": "Read .mrmouth/config.toml from the current working directory. Define the config schema: model, docker image settings, custom Dockerfile path, timeout, etc. Use serde + toml crate. Provide sensible defaults when no config exists.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:46.690963747Z",
-      "updated_at": "2026-03-06T20:16:41.191341648Z"
+      "updated_at": "2026-03-06T20:18:12.647882742Z"
     },
     "lb-ndrw": {
       "id": "lb-ndrw",
