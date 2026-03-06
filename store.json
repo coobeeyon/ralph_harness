@@ -62,13 +62,13 @@
     },
     "lb-46sk": {
       "id": "lb-46sk",
-      "title": "Implement 'ralph epic' — work through an epic",
+      "title": "Implement 'mrmouth epic' — work through an epic",
       "description": "Port run-epic.sh logic: loop agent runs focused on a specific litebrite epic until all tasks in the epic are done.",
       "item_type": "task",
       "status": "open",
       "priority": 2,
       "created_at": "2026-03-06T19:56:05.836445674Z",
-      "updated_at": "2026-03-06T19:56:05.836445674Z"
+      "updated_at": "2026-03-06T19:57:37.589819949Z"
     },
     "lb-5tdk": {
       "id": "lb-5tdk",
