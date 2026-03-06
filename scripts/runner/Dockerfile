@@ -9,18 +9,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN mkdir -p /root/.ssh && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-# Layer 3: Install litebrite (lb) from source
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
-    . /root/.cargo/env && \
-    cargo install --git https://github.com/coobeeyon/litebrite.git && \
-    cp /root/.cargo/bin/lb /usr/local/bin/lb && \
-    rustup self uninstall -y && \
-    rm -rf /root/.cargo /root/.rustup
+# Layer 3: Rust toolchain (kept for building project tools)
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Layer 4: Claude Code (changes occasionally)
+# Layer 4: Install litebrite (lb) from source
+RUN cargo install --git https://github.com/coobeeyon/litebrite.git && \
+    cp /root/.cargo/bin/lb /usr/local/bin/lb
+
+# Layer 5: Claude Code (changes occasionally)
 RUN npm install -g @anthropic-ai/claude-code
 
-# Layer 5: Non-root user matching host UID (for SSH agent socket access)
+# Layer 6: Non-root user matching host UID (for SSH agent socket access)
 ARG HOST_UID=1000
 ARG HOST_GID=1000
 RUN userdel -r node 2>/dev/null || true && \
@@ -31,6 +31,8 @@ RUN userdel -r node 2>/dev/null || true && \
     chown -R runner:runner /home/runner/.ssh
 USER runner
 ENV HOME=/home/runner
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/home/runner/.cargo/bin:${PATH}"
 RUN git config --global user.name "agent-runner" && \
     git config --global user.email "agent-runner@local"
 
