@@ -90,11 +90,22 @@ fn main() {
         return;
     }
 
-    let repo_root = match Config::find_repo_root() {
-        Ok(root) => root,
-        Err(e) => {
-            eprintln!("error: {e}");
-            std::process::exit(1);
+    let is_local = matches!(cli.command, Commands::Run { local: true, .. });
+    let repo_root = if is_local {
+        match Config::find_repo_root_or_cwd() {
+            Ok(root) => root,
+            Err(e) => {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
+        }
+    } else {
+        match Config::find_repo_root() {
+            Ok(root) => root,
+            Err(e) => {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
         }
     };
 

@@ -105,6 +105,16 @@ impl Config {
         }
     }
 
+    /// Find the repo root, falling back to cwd if no `.git` is found.
+    /// Used in local/bootstrap mode where a git repo may not exist yet.
+    pub fn find_repo_root_or_cwd() -> Result<PathBuf, ConfigError> {
+        match Self::find_repo_root() {
+            Ok(root) => Ok(root),
+            Err(ConfigError::NotARepo) => std::env::current_dir().map_err(ConfigError::Cwd),
+            Err(e) => Err(e),
+        }
+    }
+
     /// Resolve the config directory path.
     pub fn config_dir(repo_root: &Path) -> PathBuf {
         repo_root.join(CONFIG_DIR)
