@@ -1,6 +1,8 @@
 use std::io::{BufRead, BufReader};
 use std::path::Path;
 use std::process::{Child, Command, Stdio};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
 
 /// Default Dockerfile content used when no `.mrmouth/Dockerfile` exists.
 pub const DEFAULT_DOCKERFILE: &str = r#"# Stage 1: Build litebrite (lb) — static musl binary, no glibc dependency
@@ -167,11 +169,6 @@ impl DockerBuilder {
             cmd.args(["-v", &format!("{}:/home/runner/workspace", cwd.to_string_lossy())]);
         }
 
-        // Timeout
-        if let Some(timeout_secs) = args.timeout_secs {
-            cmd.args(["--stop-timeout", &timeout_secs.to_string()]);
-        }
-
         cmd.arg(&self.image_name);
         cmd.arg("/run.sh");
 
@@ -182,9 +179,34 @@ impl DockerBuilder {
             .spawn()
             .map_err(|e| DockerError::Io("spawning docker run".into(), e))?;
 
+        // Spawn a watchdog thread that stops the container after the timeout
+        let cancelled = Arc::new(AtomicBool::new(false));
+        if let Some(timeout_secs) = args.timeout_secs {
+            let container_name = args.name.clone();
+            let cancelled_clone = Arc::clone(&cancelled);
+            std::thread::spawn(move || {
+                // Sleep in 1-second increments so we can check for cancellation
+                for _ in 0..timeout_secs {
+                    std::thread::sleep(std::time::Duration::from_secs(1));
+                    if cancelled_clone.load(Ordering::Relaxed) {
+                        return;
+                    }
+                }
+                if !cancelled_clone.load(Ordering::Relaxed) {
+                    eprintln!("Timeout ({timeout_secs}s) reached — stopping container {container_name}...");
+                    let _ = Command::new("docker")
+                        .args(["stop", &container_name])
+                        .stdout(Stdio::null())
+                        .stderr(Stdio::null())
+                        .status();
+                }
+            });
+        }
+
         Ok(ContainerHandle {
             child,
             name: args.name.clone(),
+            watchdog_cancelled: cancelled,
         })
     }
 
@@ -212,6 +234,7 @@ pub struct ContainerArgs {
 pub struct ContainerHandle {
     pub child: Child,
     pub name: String,
+    watchdog_cancelled: Arc<AtomicBool>,
 }
 
 impl ContainerHandle {
@@ -254,11 +277,13 @@ impl ContainerHandle {
     }
 
     /// Wait for the container to exit and return its exit code.
+    /// Cancels the timeout watchdog once the container exits.
     pub fn wait(&mut self) -> Result<i32, DockerError> {
         let status = self
             .child
             .wait()
             .map_err(|e| DockerError::Io("waiting for container".into(), e))?;
+        self.watchdog_cancelled.store(true, Ordering::Relaxed);
         Ok(status.code().unwrap_or(-1))
     }
 }
