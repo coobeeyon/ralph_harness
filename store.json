@@ -460,6 +460,16 @@
       "created_at": "2026-03-03T14:09:52.559346650Z",
       "updated_at": "2026-03-03T15:27:37.823887360Z"
     },
+    "lb-xahc": {
+      "id": "lb-xahc",
+      "title": "Config::find_repo_root fails for bootstrap (no .git)",
+      "description": "config.rs find_repo_root() walks up looking for .git (line 98-105). In the bootstrap use case there's no git repo yet — user is in an empty directory. mrmouth init already handles this by requiring a .git dir, but the broader bootstrap flow (mrmouth run --local in a new directory) would fail. Need to handle the no-repo case, at least for --local mode.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T20:48:49.502247109Z",
+      "updated_at": "2026-03-06T20:48:49.502247109Z"
+    },
     "lb-xn4d": {
       "id": "lb-xn4d",
       "title": "End-to-end test: external/stealth mode against a real repo",
@@ -819,6 +829,11 @@
     },
     {
       "from_id": "lb-pur0",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-xahc",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
