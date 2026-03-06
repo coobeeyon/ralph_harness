@@ -487,8 +487,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 3,
+      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T20:48:56.541609509Z",
-      "updated_at": "2026-03-06T20:48:56.541609509Z"
+      "updated_at": "2026-03-06T21:06:45.573551748Z"
     },
     "lb-yhld": {
       "id": "lb-yhld",
