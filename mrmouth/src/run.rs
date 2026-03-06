@@ -18,7 +18,7 @@ pub struct RunOptions {
 
 pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<(), RunError> {
     // 1. Preflight checks
-    preflight(repo_root, &config.env_file)?;
+    preflight(repo_root, &config.env_file, opts.local)?;
 
     // 2. Resolve repo URL and branch
     let repo_url = git_remote_url(repo_root)?;
@@ -145,7 +145,7 @@ pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<()
     Ok(())
 }
 
-fn preflight(repo_root: &Path, env_file: &str) -> Result<(), RunError> {
+fn preflight(repo_root: &Path, env_file: &str, local: bool) -> Result<(), RunError> {
     // Check for Docker
     let docker_check = Command::new("docker").arg("info").stdout(std::process::Stdio::null()).stderr(std::process::Stdio::null()).status();
     match docker_check {
@@ -153,20 +153,22 @@ fn preflight(repo_root: &Path, env_file: &str) -> Result<(), RunError> {
         _ => return Err(RunError::Preflight("Docker is not available. Is Docker running?".into())),
     }
 
-    // Check for clean working tree
-    let diff_status = Command::new("git")
-        .args(["-C", &repo_root.to_string_lossy(), "diff", "--quiet"])
-        .status()
-        .map_err(|e| RunError::Io("checking git diff".into(), e))?;
-    let cached_status = Command::new("git")
-        .args(["-C", &repo_root.to_string_lossy(), "diff", "--cached", "--quiet"])
-        .status()
-        .map_err(|e| RunError::Io("checking git diff --cached".into(), e))?;
+    // Check for clean working tree (skip in local mode — the whole point is to work on local state)
+    if !local {
+        let diff_status = Command::new("git")
+            .args(["-C", &repo_root.to_string_lossy(), "diff", "--quiet"])
+            .status()
+            .map_err(|e| RunError::Io("checking git diff".into(), e))?;
+        let cached_status = Command::new("git")
+            .args(["-C", &repo_root.to_string_lossy(), "diff", "--cached", "--quiet"])
+            .status()
+            .map_err(|e| RunError::Io("checking git diff --cached".into(), e))?;
 
-    if !diff_status.success() || !cached_status.success() {
-        return Err(RunError::Preflight(
-            "Working tree has uncommitted changes. Commit or stash first.".into(),
-        ));
+        if !diff_status.success() || !cached_status.success() {
+            return Err(RunError::Preflight(
+                "Working tree has uncommitted changes. Commit or stash first.".into(),
+            ));
+        }
     }
 
     // Check env file exists (warn, don't fail)
