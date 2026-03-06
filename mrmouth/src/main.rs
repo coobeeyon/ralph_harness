@@ -2,6 +2,7 @@ mod config;
 mod docker;
 mod epic;
 mod init;
+mod litebrite;
 mod loop_cmd;
 mod prompt;
 mod run;

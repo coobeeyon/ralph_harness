@@ -2,6 +2,7 @@ use std::path::Path;
 use std::process::Command;
 
 use crate::config::Config;
+use crate::litebrite;
 use crate::run::{self, RunOptions};
 use crate::summary;
 
@@ -48,7 +49,7 @@ pub fn execute(config: &Config, repo_root: &Path, opts: LoopOptions) -> Result<(
         }
 
         // Sync litebrite so decider sees fresh task state
-        sync_litebrite(repo_root);
+        litebrite::sync(repo_root);
 
         // Generate summary (best-effort)
         if !opts.no_summary {
@@ -132,23 +133,6 @@ fn should_continue(repo_root: &Path, decider_model: &str) -> Result<Decision, Lo
         Ok(Decision::Continue(reason))
     } else {
         Ok(Decision::Stop(reason))
-    }
-}
-
-fn sync_litebrite(repo_root: &Path) {
-    if Command::new("which")
-        .arg("lb")
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .status()
-        .map_or(false, |s| s.success())
-    {
-        let _ = Command::new("lb")
-            .arg("sync")
-            .current_dir(repo_root)
-            .stdout(std::process::Stdio::null())
-            .stderr(std::process::Stdio::null())
-            .status();
     }
 }
 

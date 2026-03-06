@@ -2,6 +2,7 @@ use std::path::Path;
 use std::process::Command;
 
 use crate::config::Config;
+use crate::litebrite;
 use crate::run::{self, RunOptions};
 
 pub struct EpicOptions {
@@ -182,13 +183,7 @@ fn git_checkout_new_branch(repo_root: &Path, branch: &str) -> Result<(), EpicErr
 }
 
 fn sync_and_push(repo_root: &Path, branch: &str) {
-    // Sync litebrite
-    let _ = Command::new("lb")
-        .arg("sync")
-        .current_dir(repo_root)
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .status();
+    litebrite::sync(repo_root);
 
     // Push to remote
     let _ = Command::new("git")

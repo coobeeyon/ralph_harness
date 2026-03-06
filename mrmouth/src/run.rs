@@ -5,6 +5,7 @@ use std::process::Command;
 
 use crate::config::Config;
 use crate::docker::{ContainerArgs, DockerBuilder};
+use crate::litebrite;
 use crate::prompt;
 use crate::stream_fmt::{self, StreamFormatter};
 
@@ -32,7 +33,7 @@ pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<()
         .unwrap_or_else(|| git_current_branch(repo_root).unwrap_or_else(|_| "main".into()));
 
     // 3. Sync litebrite (best-effort)
-    sync_litebrite(repo_root);
+    litebrite::init_and_sync(repo_root);
 
     // 4. Write the runner entrypoint script to a temp file
     let runner_script = write_runner_script(repo_root, &opts.model, opts.prompt_override.as_deref())?;
@@ -138,7 +139,7 @@ pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<()
     }
 
     // 14. Sync litebrite again (pick up any changes)
-    sync_litebrite(repo_root);
+    litebrite::init_and_sync(repo_root);
 
     eprintln!("Done. Log saved: {}", log_path.display());
 
@@ -204,35 +205,6 @@ fn git_current_branch(repo_root: &Path) -> Result<String, RunError> {
         .map_err(|e| RunError::Io("getting current branch".into(), e))?;
 
     Ok(String::from_utf8_lossy(&output.stdout).trim().to_string())
-}
-
-fn sync_litebrite(repo_root: &Path) {
-    if Command::new("which")
-        .arg("lb")
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .status()
-        .map_or(false, |s| s.success())
-    {
-        let _ = Command::new("lb")
-            .args(["init"])
-            .current_dir(repo_root)
-            .stdout(std::process::Stdio::null())
-            .stderr(std::process::Stdio::null())
-            .status();
-        let _ = Command::new("lb")
-            .args(["setup", "claude"])
-            .current_dir(repo_root)
-            .stdout(std::process::Stdio::null())
-            .stderr(std::process::Stdio::null())
-            .status();
-        let _ = Command::new("lb")
-            .args(["sync"])
-            .current_dir(repo_root)
-            .stdout(std::process::Stdio::null())
-            .stderr(std::process::Stdio::null())
-            .status();
-    }
 }
 
 /// Write the runner entrypoint script that runs inside the container.
