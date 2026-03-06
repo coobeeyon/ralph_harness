@@ -788,6 +788,11 @@
       "dep_type": "parent"
     },
     {
+      "from_id": "lb-kfds",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
       "from_id": "lb-kn83",
       "to_id": "lb-b5ig",
       "dep_type": "parent"
@@ -969,11 +974,6 @@
     },
     {
       "from_id": "lb-yhld",
-      "to_id": "lb-hdke",
-      "dep_type": "parent"
-    },
-    {
-      "from_id": "lb-kfds",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
