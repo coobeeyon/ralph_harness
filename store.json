@@ -250,6 +250,16 @@
       "created_at": "2026-03-06T19:55:37.915785279Z",
       "updated_at": "2026-03-06T19:55:37.915785279Z"
     },
+    "lb-p44p": {
+      "id": "lb-p44p",
+      "title": "Scaffold Rust project with clap CLI",
+      "description": "cargo init, add clap with derive feature, define subcommands: run, loop, epic, init, summary. Just the CLI skeleton — subcommands can print 'not implemented' for now. Set up Cargo.toml with metadata for eventual crates.io publish.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:42.618235236Z",
+      "updated_at": "2026-03-06T19:55:42.618235236Z"
+    },
     "lb-pggs": {
       "id": "lb-pggs",
       "title": "Gut external/init modes and simplify to template-only",
@@ -554,6 +564,11 @@
     },
     {
       "from_id": "lb-ojkd",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-p44p",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
