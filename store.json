@@ -140,6 +140,16 @@
       "created_at": "2026-03-03T14:09:41.520147390Z",
       "updated_at": "2026-03-03T15:35:45.953585069Z"
     },
+    "lb-hdke": {
+      "id": "lb-hdke",
+      "title": "Ralph v2: Rust CLI tool",
+      "description": "Rewrite ralph as a standalone Rust CLI distributed via cargo install / GitHub releases. ralph becomes an external tool you run from inside any repo. Config lives in the target repo (.ralph/). Single mode: always external. Subcommands: run, loop, epic, init, summary. Replaces the current bash harness entirely.",
+      "item_type": "epic",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:08.608835034Z",
+      "updated_at": "2026-03-06T19:55:08.608835034Z"
+    },
     "lb-iizd": {
       "id": "lb-iizd",
       "title": "Update remaining host scripts for external mode",
