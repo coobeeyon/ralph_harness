@@ -55,11 +55,10 @@
       "title": "Remove lib.sh overlay system and external/init mode logic",
       "description": "Delete resolve_project(), resolve_overlay(), build_overlay_dir() from lib.sh. Remove all RALPH_MODE conditionals. lib.sh should just set paths and env vars for the single (template) mode. Delete scripts/init.sh entirely.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:13.818985478Z",
-      "updated_at": "2026-03-06T20:40:29.190023129Z"
+      "updated_at": "2026-03-06T20:42:00.941790930Z"
     },
     "lb-46sk": {
       "id": "lb-46sk",
