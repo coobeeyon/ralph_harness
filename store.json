@@ -290,6 +290,16 @@
       "created_at": "2026-03-01T16:09:14.206198679Z",
       "updated_at": "2026-03-01T19:24:01.756848387Z"
     },
+    "lb-twbl": {
+      "id": "lb-twbl",
+      "title": "Update README.md and CLAUDE.md for template-only",
+      "description": "Rewrite README to describe the single mode: this is a template repo, you create a repo from it, agents work on it. Remove all docs about external mode, init mode, and overlay system. Update CLAUDE.md if it references external/init modes.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:31.923231258Z",
+      "updated_at": "2026-03-06T19:55:31.923231258Z"
+    },
     "lb-w1xa": {
       "id": "lb-w1xa",
       "title": "Remove defaults/ directory and external mode tests",
@@ -524,6 +534,11 @@
     },
     {
       "from_id": "lb-w1xa",
+      "to_id": "lb-pggs",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-twbl",
       "to_id": "lb-pggs",
       "dep_type": "parent"
     }
