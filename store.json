@@ -726,6 +726,11 @@
       "from_id": "lb-1nv7",
       "to_id": "lb-oar7",
       "dep_type": "blocks"
+    },
+    {
+      "from_id": "lb-pggs",
+      "to_id": "lb-hdke",
+      "dep_type": "blocks"
     }
   ]
 }
