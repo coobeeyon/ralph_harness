@@ -272,13 +272,13 @@
     },
     "lb-n8qx": {
       "id": "lb-n8qx",
-      "title": "Implement config loading from .ralph/",
+      "title": "Implement config loading from .mrmouth/",
       "description": "Read .ralph/config.toml from the current working directory. Define the config schema: model, docker image settings, custom Dockerfile path, timeout, etc. Use serde + toml crate. Provide sensible defaults when no config exists.",
       "item_type": "task",
       "status": "open",
       "priority": 2,
       "created_at": "2026-03-06T19:55:46.690963747Z",
-      "updated_at": "2026-03-06T19:55:46.690963747Z"
+      "updated_at": "2026-03-06T19:57:37.572996904Z"
     },
     "lb-ndrw": {
       "id": "lb-ndrw",
