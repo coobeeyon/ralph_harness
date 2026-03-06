@@ -3,7 +3,12 @@ use std::path::Path;
 use std::process::{Child, Command, Stdio};
 
 /// Default Dockerfile content used when no `.mrmouth/Dockerfile` exists.
-pub const DEFAULT_DOCKERFILE: &str = r#"FROM node:22
+pub const DEFAULT_DOCKERFILE: &str = r#"# Stage 1: Build litebrite (lb) — discarded after build
+FROM rust:slim AS lb-builder
+RUN cargo install --git https://github.com/coobeeyon/litebrite.git
+
+# Stage 2: Runtime image — no Rust toolchain
+FROM node:22
 
 # Layer 1: System deps (changes ~never)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,18 +19,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN mkdir -p /root/.ssh && \
     ssh-keyscan github.com >> /root/.ssh/known_hosts
 
-# Layer 3: Rust toolchain (kept for building project tools)
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
+# Layer 3: Copy lb binary from builder
+COPY --from=lb-builder /usr/local/cargo/bin/lb /usr/local/bin/lb
 
-# Layer 4: Install litebrite (lb) from source
-RUN cargo install --git https://github.com/coobeeyon/litebrite.git && \
-    cp /root/.cargo/bin/lb /usr/local/bin/lb
-
-# Layer 5: Claude Code (changes occasionally)
+# Layer 4: Claude Code (changes occasionally)
 RUN npm install -g @anthropic-ai/claude-code
 
-# Layer 6: Non-root user matching host UID (for SSH agent socket access)
+# Layer 5: Non-root user matching host UID (for SSH agent socket access)
 ARG HOST_UID=1000
 ARG HOST_GID=1000
 RUN userdel -r node 2>/dev/null || true && \
@@ -36,8 +36,6 @@ RUN userdel -r node 2>/dev/null || true && \
     chown -R runner:runner /home/runner/.ssh
 USER runner
 ENV HOME=/home/runner
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/home/runner/.cargo/bin:${PATH}"
 RUN git config --global user.name "agent-runner" && \
     git config --global user.email "agent-runner@local"
 
