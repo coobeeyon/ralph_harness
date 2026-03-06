@@ -335,10 +335,10 @@
       "title": "Gut external/init modes and simplify to template-only",
       "description": "Remove external mode, init mode, overlay system, projects/, defaults/, and all supporting code. Simplify run.sh and runner/run.sh to only handle template mode. Update README and CLAUDE.md. This cleans up the codebase so agents building v2 have less noise.",
       "item_type": "epic",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "created_at": "2026-03-06T19:55:03.251047490Z",
-      "updated_at": "2026-03-06T19:55:03.251047490Z"
+      "updated_at": "2026-03-06T20:47:52.376894477Z"
     },
     "lb-pwdo": {
       "id": "lb-pwdo",
