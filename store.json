@@ -277,8 +277,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:46.690963747Z",
-      "updated_at": "2026-03-06T19:57:57.354414205Z"
+      "updated_at": "2026-03-06T20:16:41.191341648Z"
     },
     "lb-ndrw": {
       "id": "lb-ndrw",
