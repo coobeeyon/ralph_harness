@@ -419,6 +419,16 @@
       "priority": 2,
       "created_at": "2026-03-03T14:10:08.170973578Z",
       "updated_at": "2026-03-03T15:35:30.225225040Z"
+    },
+    "lb-yhld": {
+      "id": "lb-yhld",
+      "title": "Fix prompt.rs Dockerfile reference",
+      "description": "DEFAULT_PROMPT in prompt.rs line 27 still says 'Edit scripts/runner/Dockerfile' — should reference .mrmouth/Dockerfile instead.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-06T20:48:00.274553236Z",
+      "updated_at": "2026-03-06T20:48:00.274553236Z"
     }
   },
   "deps": [
@@ -730,6 +740,11 @@
     {
       "from_id": "lb-xn4d",
       "to_id": "lb-h8k7",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-yhld",
+      "to_id": "lb-hdke",
       "dep_type": "parent"
     }
   ]
