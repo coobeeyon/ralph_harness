@@ -1,6 +1,7 @@
 mod config;
 mod docker;
 mod init;
+mod loop_cmd;
 mod prompt;
 mod run;
 pub mod stream_fmt;
@@ -117,10 +118,16 @@ fn main() {
             }
         }
         Commands::Loop { delay, max_runs, no_summary } => {
-            let delay = if delay > 0 { delay } else { config.loop_config.delay };
-            let max_runs = max_runs.unwrap_or(config.loop_config.max_runs);
-            eprintln!("mrmouth loop: not implemented yet");
-            eprintln!("  delay={delay}, max_runs={max_runs}, no_summary={no_summary}");
+            let opts = loop_cmd::LoopOptions {
+                delay: if delay > 0 { delay } else { config.loop_config.delay },
+                max_runs: max_runs.unwrap_or(config.loop_config.max_runs),
+                no_summary,
+                model: config.model.clone(),
+            };
+            if let Err(e) = loop_cmd::execute(&config, &repo_root, opts) {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
         }
         Commands::Epic { epic_id, timeout, max_failures } => {
             eprintln!("mrmouth epic: not implemented yet");
