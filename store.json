@@ -155,11 +155,10 @@
       "title": "Simplify runner/run.sh to template-only",
       "description": "Remove the /overlay conditional block that copies CLAUDE.md, AGENTS.md, SPEC.md, claude-settings.json, and Dockerfile into the workspace. In template mode the repo already has these files, so the overlay logic is unnecessary.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:23.891791188Z",
-      "updated_at": "2026-03-06T20:45:01.940767211Z"
+      "updated_at": "2026-03-06T20:45:24.315678692Z"
     },
     "lb-g4rj": {
       "id": "lb-g4rj",
