@@ -20,8 +20,12 @@ pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<()
     // 1. Preflight checks
     preflight(repo_root, &config.env_file, opts.local)?;
 
-    // 2. Resolve repo URL and branch
-    let repo_url = git_remote_url(repo_root)?;
+    // 2. Resolve repo URL and branch (repo URL not needed in local mode)
+    let repo_url = if opts.local {
+        git_remote_url(repo_root).unwrap_or_default()
+    } else {
+        git_remote_url(repo_root)?
+    };
     let branch = config
         .branch
         .clone()
@@ -249,22 +253,29 @@ fn write_runner_script(
         r#"#!/usr/bin/env bash
 set -euo pipefail
 
-repo_url="${{REPO_URL:?REPO_URL required}}"
-branch="${{BRANCH:?BRANCH required}}"
+repo_url="${{REPO_URL:-}}"
+branch="${{BRANCH:-main}}"
 work_dir="$HOME/workspace"
 
 # --- Clone repo (skip if workspace already mounted) ---
 if [ ! -d "$work_dir/.git" ]; then
-  echo "Cloning $repo_url (branch: $branch)..."
-  git clone --branch "$branch" "$repo_url" "$work_dir"
+  if [ -n "$repo_url" ]; then
+    echo "Cloning $repo_url (branch: $branch)..."
+    git clone --branch "$branch" "$repo_url" "$work_dir"
+  else
+    echo "No repo URL and no .git — starting fresh in $work_dir"
+    mkdir -p "$work_dir"
+  fi
 fi
 cd "$work_dir"
 git config --global --add safe.directory "$work_dir"
 
-# --- Initialize litebrite ---
-echo "Initializing litebrite..."
-lb init
-lb setup claude 2>/dev/null || true
+# --- Initialize litebrite (requires git repo) ---
+if [ -d "$work_dir/.git" ]; then
+  echo "Initializing litebrite..."
+  lb init
+  lb setup claude 2>/dev/null || true
+fi
 
 # --- Restore .claude.json from persisted backup if missing ---
 claude_config="$HOME/.claude.json"
@@ -283,9 +294,11 @@ claude -p --dangerously-skip-permissions --verbose --output-format stream-json -
 echo "Agent run complete."
 
 # --- Belt-and-suspenders: force sync/push even if agent forgot ---
-echo "Post-agent cleanup: forcing lb sync and git push..."
-lb sync 2>/dev/null || true
-git push 2>/dev/null || true
+if [ -d "$work_dir/.git" ]; then
+  echo "Post-agent cleanup: forcing lb sync and git push..."
+  lb sync 2>/dev/null || true
+  git push 2>/dev/null || true
+fi
 "#
     );
 
