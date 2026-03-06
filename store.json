@@ -85,11 +85,10 @@
       "title": "Implement 'mrmouth run' — core agent session",
       "description": "The main command. Build Docker image (shell out to docker CLI), run container with repo mounted or cloned, stream output with formatting, handle log capture, pull changes after agent exits. Port the essential logic from the current bash run.sh + runner/run.sh.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:52.822379112Z",
-      "updated_at": "2026-03-06T20:23:33.075114381Z"
+      "updated_at": "2026-03-06T20:27:25.218238168Z"
     },
     "lb-8eon": {
       "id": "lb-8eon",
