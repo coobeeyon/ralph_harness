@@ -312,13 +312,13 @@
     },
     "lb-p44p": {
       "id": "lb-p44p",
-      "title": "Scaffold Rust project with clap CLI",
+      "title": "Scaffold Mr Mouth Rust project with clap CLI",
       "description": "cargo init, add clap with derive feature, define subcommands: run, loop, epic, init, summary. Just the CLI skeleton — subcommands can print 'not implemented' for now. Set up Cargo.toml with metadata for eventual crates.io publish.",
       "item_type": "task",
       "status": "open",
       "priority": 2,
       "created_at": "2026-03-06T19:55:42.618235236Z",
-      "updated_at": "2026-03-06T19:55:42.618235236Z"
+      "updated_at": "2026-03-06T19:57:37.568707064Z"
     },
     "lb-p455": {
       "id": "lb-p455",
