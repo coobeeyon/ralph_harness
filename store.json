@@ -230,6 +230,16 @@
       "created_at": "2026-02-28T18:28:39.294522394Z",
       "updated_at": "2026-02-28T18:28:53.218399258Z"
     },
+    "lb-n8qx": {
+      "id": "lb-n8qx",
+      "title": "Implement config loading from .ralph/",
+      "description": "Read .ralph/config.toml from the current working directory. Define the config schema: model, docker image settings, custom Dockerfile path, timeout, etc. Use serde + toml crate. Provide sensible defaults when no config exists.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:46.690963747Z",
+      "updated_at": "2026-03-06T19:55:46.690963747Z"
+    },
     "lb-ndrw": {
       "id": "lb-ndrw",
       "title": "Test init script end-to-end",
@@ -569,6 +579,11 @@
     },
     {
       "from_id": "lb-p44p",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-n8qx",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
