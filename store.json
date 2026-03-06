@@ -335,11 +335,10 @@
       "title": "docker.rs --stop-timeout doesn't actually kill the container",
       "description": "docker.rs line 171 uses --stop-timeout for the timeout flag. But --stop-timeout only controls how long Docker waits after sending SIGTERM before SIGKILL — it doesn't actually stop the container after N seconds. For a real timeout, need to either use 'timeout' command wrapper, a separate watchdog thread that does 'docker stop', or --init with a signal-based approach.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T21:27:43.707579795Z",
-      "updated_at": "2026-03-06T22:34:27.881856814Z"
+      "updated_at": "2026-03-06T22:35:28.119222845Z"
     },
     "lb-ltlf": {
       "id": "lb-ltlf",
