@@ -1,4 +1,7 @@
+mod config;
+
 use clap::{Parser, Subcommand};
+use config::Config;
 
 #[derive(Parser)]
 #[command(name = "mrmouth", version, about = "Run Claude Code as an autonomous coding agent in Docker containers")]
@@ -70,25 +73,52 @@ enum Commands {
 fn main() {
     let cli = Cli::parse();
 
+    // Init doesn't need config (it creates it)
+    if matches!(cli.command, Commands::Init) {
+        eprintln!("mrmouth init: not implemented yet");
+        return;
+    }
+
+    let repo_root = match Config::find_repo_root() {
+        Ok(root) => root,
+        Err(e) => {
+            eprintln!("error: {e}");
+            std::process::exit(1);
+        }
+    };
+
+    let config = match Config::load(&repo_root) {
+        Ok(c) => c,
+        Err(e) => {
+            eprintln!("error: {e}");
+            std::process::exit(1);
+        }
+    };
+
     match cli.command {
         Commands::Run { raw, model, timeout, local } => {
+            let model = model.unwrap_or(config.model);
             eprintln!("mrmouth run: not implemented yet");
-            eprintln!("  raw={raw}, model={model:?}, timeout={timeout:?}, local={local}");
+            eprintln!("  raw={raw}, model={model}, timeout={timeout:?}, local={local}");
+            eprintln!("  image={}, dockerfile={}", config.image, config.dockerfile);
         }
         Commands::Loop { delay, max_runs, no_summary } => {
+            let delay = if delay > 0 { delay } else { config.loop_config.delay };
+            let max_runs = max_runs.unwrap_or(config.loop_config.max_runs);
             eprintln!("mrmouth loop: not implemented yet");
-            eprintln!("  delay={delay}, max_runs={max_runs:?}, no_summary={no_summary}");
+            eprintln!("  delay={delay}, max_runs={max_runs}, no_summary={no_summary}");
         }
         Commands::Epic { epic_id, timeout, max_failures } => {
             eprintln!("mrmouth epic: not implemented yet");
             eprintln!("  epic_id={epic_id}, timeout={timeout}, max_failures={max_failures}");
         }
-        Commands::Init => {
-            eprintln!("mrmouth init: not implemented yet");
-        }
+        Commands::Init => unreachable!(),
         Commands::Summary { log_file } => {
+            let log_file = log_file.unwrap_or_else(|| {
+                format!("{}/latest.jsonl", config.log_dir)
+            });
             eprintln!("mrmouth summary: not implemented yet");
-            eprintln!("  log_file={log_file:?}");
+            eprintln!("  log_file={log_file}");
         }
     }
 }
