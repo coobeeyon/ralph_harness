@@ -24,7 +24,7 @@ pub const DEFAULT_PROMPT: &str = r#"You are ONE agent in a relay. Do ONE task, t
 - Every session ends with: lb close, lb sync, git push — in that order.
 - The next agent will continue where you left off.
 - The task graph is a living document. Create, restructure, and close tasks as understanding grows.
-- Need a tool or dependency? Edit `scripts/runner/Dockerfile` instead of installing at runtime — changes you commit are baked into the next run's image.
+- Need a tool or dependency? Edit `.mrmouth/Dockerfile` instead of installing at runtime — changes you commit are baked into the next run's image.
 "#;
 
 /// Load the agent prompt, checking for a custom override in `.mrmouth/prompt.md`.
