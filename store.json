@@ -683,6 +683,11 @@
       "dep_type": "blocks"
     },
     {
+      "from_id": "lb-eizn",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
       "from_id": "lb-fdtj",
       "to_id": "lb-pggs",
       "dep_type": "parent"
@@ -904,11 +909,6 @@
     },
     {
       "from_id": "lb-yhld",
-      "to_id": "lb-hdke",
-      "dep_type": "parent"
-    },
-    {
-      "from_id": "lb-eizn",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
