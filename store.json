@@ -302,13 +302,13 @@
     },
     "lb-ojkd": {
       "id": "lb-ojkd",
-      "title": "Write SPEC.md for ralph v2 Rust CLI",
+      "title": "Write SPEC.md for Mr Mouth Rust CLI",
       "description": "Define the tool: what it does, how it's invoked, config format (.ralph/config.toml), subcommands (run, loop, epic, init), how it interacts with Docker, how it reads repo config, what the base Dockerfile looks like, distribution story (cargo install + github releases). This is the blueprint for all subsequent tasks.",
       "item_type": "task",
       "status": "open",
       "priority": 2,
       "created_at": "2026-03-06T19:55:37.915785279Z",
-      "updated_at": "2026-03-06T19:55:37.915785279Z"
+      "updated_at": "2026-03-06T19:57:37.563639955Z"
     },
     "lb-p44p": {
       "id": "lb-p44p",
