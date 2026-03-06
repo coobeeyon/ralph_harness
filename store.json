@@ -322,13 +322,13 @@
     },
     "lb-p455": {
       "id": "lb-p455",
-      "title": "Implement 'ralph loop' — repeated runs with decider",
+      "title": "Implement 'mrmouth loop' — repeated runs with decider",
       "description": "Port run-loop.sh logic: run agent, check if more work remains (via decide.sh equivalent), repeat. The decider calls Claude API to assess whether to continue. Add max-iterations and cooldown config.",
       "item_type": "task",
       "status": "open",
       "priority": 2,
       "created_at": "2026-03-06T19:56:01.339100665Z",
-      "updated_at": "2026-03-06T19:56:01.339100665Z"
+      "updated_at": "2026-03-06T19:57:37.585661077Z"
     },
     "lb-pggs": {
       "id": "lb-pggs",
