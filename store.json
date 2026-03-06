@@ -105,11 +105,10 @@
       "title": "run.rs preflight should skip dirty-tree check in --local mode",
       "description": "run.rs preflight() always checks for a clean working tree (line 157-166). But in --local mode you're bind-mounting the working directory — the agent is meant to work on it directly. Requiring a clean tree defeats the purpose of local mode, especially for bootstrap where there may be uncommitted scaffolding.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T20:48:36.138712755Z",
-      "updated_at": "2026-03-06T21:02:00.094935976Z"
+      "updated_at": "2026-03-06T21:02:55.021231927Z"
     },
     "lb-9k17": {
       "id": "lb-9k17",
