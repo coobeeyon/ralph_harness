@@ -175,11 +175,10 @@
       "title": "summary.rs uses --dangerously-skip-permissions on host",
       "description": "summary.rs line 64 runs claude with --dangerously-skip-permissions on the host to generate summaries. This is unnecessary and risky — the summary prompt just asks it to read a log file and write a markdown file. Should use normal permissions with allowedTools restricted to Read and Write, similar to how the decider limits tools.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T21:27:51.192294587Z",
-      "updated_at": "2026-03-06T22:39:24.971656754Z"
+      "updated_at": "2026-03-06T22:39:54.511069054Z"
     },
     "lb-fdtj": {
       "id": "lb-fdtj",
