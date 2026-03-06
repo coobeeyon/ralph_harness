@@ -87,8 +87,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:52.822379112Z",
-      "updated_at": "2026-03-06T19:57:57.360084859Z"
+      "updated_at": "2026-03-06T20:23:33.075114381Z"
     },
     "lb-8eon": {
       "id": "lb-8eon",
