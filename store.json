@@ -260,6 +260,16 @@
       "created_at": "2026-03-01T16:09:00.750596837Z",
       "updated_at": "2026-03-01T19:24:01.719014340Z"
     },
+    "lb-q71j": {
+      "id": "lb-q71j",
+      "title": "Simplify run.sh to template-only",
+      "description": "Remove project_name arg parsing, overlay_dir logic, external mode docker args (overlay mount, LOCAL_PATH bind mount), Dockerfile extraction from container, and all RALPH_MODE conditionals. Should just: check clean tree, build image, run container, pull changes.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:19.409611166Z",
+      "updated_at": "2026-03-06T19:55:19.409611166Z"
+    },
     "lb-rl57": {
       "id": "lb-rl57",
       "title": "Create test fixtures and verify formatter",
@@ -479,6 +489,11 @@
     },
     {
       "from_id": "lb-3yz9",
+      "to_id": "lb-pggs",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-q71j",
       "to_id": "lb-pggs",
       "dep_type": "parent"
     }
