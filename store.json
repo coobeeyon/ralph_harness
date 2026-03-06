@@ -385,11 +385,10 @@
       "title": "Update README.md and CLAUDE.md for template-only",
       "description": "Rewrite README to describe the single mode: this is a template repo, you create a repo from it, agents work on it. Remove all docs about external mode, init mode, and overlay system. Update CLAUDE.md if it references external/init modes.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:31.923231258Z",
-      "updated_at": "2026-03-06T20:46:40.432772555Z"
+      "updated_at": "2026-03-06T20:47:52.372337731Z"
     },
     "lb-w1xa": {
       "id": "lb-w1xa",
