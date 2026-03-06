@@ -230,6 +230,16 @@
       "created_at": "2026-03-01T16:08:55.490550324Z",
       "updated_at": "2026-03-01T19:24:01.708513460Z"
     },
+    "lb-ja4p": {
+      "id": "lb-ja4p",
+      "title": "Summary subcommand is still a stub",
+      "description": "main.rs line 151-153: Commands::Summary just prints 'not implemented yet'. Needs actual implementation — read log file, call claude CLI with haiku model, write markdown summary. The loop_cmd.rs generate_summary() already has most of this logic and could be extracted.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T20:48:05.934410036Z",
+      "updated_at": "2026-03-06T20:48:05.934410036Z"
+    },
     "lb-kn83": {
       "id": "lb-kn83",
       "title": "Switch claude to stream-json output format",
@@ -744,6 +754,11 @@
     },
     {
       "from_id": "lb-yhld",
+      "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-ja4p",
       "to_id": "lb-hdke",
       "dep_type": "parent"
     }
