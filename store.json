@@ -325,11 +325,10 @@
       "title": "Implement 'mrmouth loop' — repeated runs with decider",
       "description": "Port run-loop.sh logic: run agent, check if more work remains (via decide.sh equivalent), repeat. The decider calls Claude API to assess whether to continue. Add max-iterations and cooldown config.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:56:01.339100665Z",
-      "updated_at": "2026-03-06T20:33:17.292326159Z"
+      "updated_at": "2026-03-06T20:34:50.398119391Z"
     },
     "lb-pggs": {
       "id": "lb-pggs",
