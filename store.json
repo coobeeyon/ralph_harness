@@ -365,10 +365,10 @@
       "title": "Simplify run.sh to template-only",
       "description": "Remove project_name arg parsing, overlay_dir logic, external mode docker args (overlay mount, LOCAL_PATH bind mount), Dockerfile extraction from container, and all RALPH_MODE conditionals. Should just: check clean tree, build image, run container, pull changes.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "created_at": "2026-03-06T19:55:19.409611166Z",
-      "updated_at": "2026-03-06T19:55:19.409611166Z"
+      "updated_at": "2026-03-06T20:46:36.894404618Z"
     },
     "lb-rl57": {
       "id": "lb-rl57",
