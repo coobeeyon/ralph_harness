@@ -95,11 +95,10 @@
       "title": "Port stream-fmt.ts to Rust",
       "description": "Rewrite the JSONL stream formatter in Rust. Parse Claude's stream-json output, format it for terminal display. This removes the bun dependency. Used by 'ralph run' for real-time output.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:56.696106661Z",
-      "updated_at": "2026-03-06T20:19:28.090878101Z"
+      "updated_at": "2026-03-06T20:21:56.046642925Z"
     },
     "lb-9k17": {
       "id": "lb-9k17",
