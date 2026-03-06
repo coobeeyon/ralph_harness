@@ -210,6 +210,16 @@
       "created_at": "2026-03-02T15:19:05.249317334Z",
       "updated_at": "2026-03-02T15:57:28.877932421Z"
     },
+    "lb-pggs": {
+      "id": "lb-pggs",
+      "title": "Gut external/init modes and simplify to template-only",
+      "description": "Remove external mode, init mode, overlay system, projects/, defaults/, and all supporting code. Simplify run.sh and runner/run.sh to only handle template mode. Update README and CLAUDE.md. This cleans up the codebase so agents building v2 have less noise.",
+      "item_type": "epic",
+      "status": "open",
+      "priority": 2,
+      "created_at": "2026-03-06T19:55:03.251047490Z",
+      "updated_at": "2026-03-06T19:55:03.251047490Z"
+    },
     "lb-pwdo": {
       "id": "lb-pwdo",
       "title": "External/stealth mode — run harness against repo from outside",
