@@ -54,8 +54,7 @@ pub fn execute(config: &Config, repo_root: &Path, opts: EpicOptions) -> Result<(
             "You are working on epic {}. \
             Run 'lb list --parent {}' to see tasks. Pick ONE open child task and complete it. \
             Do NOT work on tasks outside this epic. \
-            Commit your changes and close the item when done. \
-            Do NOT push — the runner handles pushing.",
+            Commit your changes, close the item, and push when done.",
             opts.epic_id, opts.epic_id
         );
 
