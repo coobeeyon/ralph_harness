@@ -485,11 +485,10 @@
       "title": "epic.rs prompt tells agent 'Do NOT push' but runner script always pushes",
       "description": "epic.rs line 58 says 'Do NOT push — the runner handles pushing.' But the runner entrypoint script (generated in run.rs) always does 'git push' in the belt-and-suspenders cleanup. These contradict each other. Either let the agent push (and remove the instruction) or have the runner script skip the push when run from epic mode.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T21:27:56.593268849Z",
-      "updated_at": "2026-03-06T22:37:15.584467446Z"
+      "updated_at": "2026-03-06T22:37:44.765738465Z"
     },
     "lb-tapt": {
       "id": "lb-tapt",
