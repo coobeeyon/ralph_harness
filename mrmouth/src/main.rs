@@ -1,4 +1,5 @@
 mod config;
+pub mod stream_fmt;
 
 use clap::{Parser, Subcommand};
 use config::Config;
