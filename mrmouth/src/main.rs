@@ -6,6 +6,7 @@ mod loop_cmd;
 mod prompt;
 mod run;
 pub mod stream_fmt;
+mod summary;
 
 use clap::{Parser, Subcommand};
 use config::Config;
@@ -148,8 +149,10 @@ fn main() {
             let log_file = log_file.unwrap_or_else(|| {
                 format!("{}/latest.jsonl", config.log_dir)
             });
-            eprintln!("mrmouth summary: not implemented yet");
-            eprintln!("  log_file={log_file}");
+            if let Err(e) = summary::execute(&config, &repo_root, &log_file) {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
         }
     }
 }

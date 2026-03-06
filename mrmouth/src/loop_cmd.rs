@@ -3,6 +3,7 @@ use std::process::Command;
 
 use crate::config::Config;
 use crate::run::{self, RunOptions};
+use crate::summary;
 
 pub struct LoopOptions {
     pub delay: u32,
@@ -49,9 +50,12 @@ pub fn execute(config: &Config, repo_root: &Path, opts: LoopOptions) -> Result<(
         // Sync litebrite so decider sees fresh task state
         sync_litebrite(repo_root);
 
-        // Generate summary (best-effort, non-blocking)
+        // Generate summary (best-effort)
         if !opts.no_summary {
-            generate_summary(config, repo_root);
+            let log_file = format!("{}/latest.jsonl", config.log_dir);
+            if let Err(e) = summary::execute(config, repo_root, &log_file) {
+                eprintln!("Summary generation failed: {e}");
+            }
         }
 
         // Ask decider whether to continue
@@ -128,61 +132,6 @@ fn should_continue(repo_root: &Path, decider_model: &str) -> Result<Decision, Lo
         Ok(Decision::Continue(reason))
     } else {
         Ok(Decision::Stop(reason))
-    }
-}
-
-fn generate_summary(config: &Config, repo_root: &Path) {
-    let log_dir = repo_root.join(&config.log_dir);
-    let latest = log_dir.join("latest.jsonl");
-
-    if !latest.exists() {
-        return;
-    }
-
-    // Resolve the symlink to get the real log filename
-    let log_file = match std::fs::read_link(&latest) {
-        Ok(target) => log_dir.join(target),
-        Err(_) => latest,
-    };
-
-    let log_name = log_file
-        .file_stem()
-        .map(|s| s.to_string_lossy().to_string())
-        .unwrap_or_else(|| "unknown".into());
-
-    let summary_dir = log_dir.join("summaries");
-    let _ = std::fs::create_dir_all(&summary_dir);
-    let summary_file = summary_dir.join(format!("{log_name}.md"));
-
-    let prompt = format!(
-        "Read the log file at {}. Write a concise markdown summary to {} covering:\n\
-        - What tasks were worked on\n\
-        - What was accomplished (files created/modified, commits)\n\
-        - Whether the run succeeded or failed (and why)\n\
-        - Any errors or notable events\n\
-        \n\
-        Also print the summary to stdout.",
-        log_file.display(),
-        summary_file.display()
-    );
-
-    eprintln!("Generating summary...");
-    let result = Command::new("claude")
-        .args([
-            "-p",
-            "--model", &config.loop_config.summary_model,
-            "--dangerously-skip-permissions",
-        ])
-        .arg(&prompt)
-        .current_dir(repo_root)
-        .stdout(std::process::Stdio::inherit())
-        .stderr(std::process::Stdio::inherit())
-        .status();
-
-    match result {
-        Ok(s) if s.success() => eprintln!("Summary saved: {}", summary_file.display()),
-        Ok(s) => eprintln!("Summary generation failed (exit code {})", s.code().unwrap_or(-1)),
-        Err(e) => eprintln!("Summary generation failed: {e}"),
     }
 }
 
