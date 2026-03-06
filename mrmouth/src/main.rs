@@ -1,5 +1,6 @@
 mod config;
 mod docker;
+mod epic;
 mod init;
 mod loop_cmd;
 mod prompt;
@@ -111,6 +112,7 @@ fn main() {
                 model: model.unwrap_or_else(|| config.model.clone()),
                 timeout,
                 local,
+                prompt_override: None,
             };
             if let Err(e) = run::execute(&config, &repo_root, opts) {
                 eprintln!("error: {e}");
@@ -130,8 +132,16 @@ fn main() {
             }
         }
         Commands::Epic { epic_id, timeout, max_failures } => {
-            eprintln!("mrmouth epic: not implemented yet");
-            eprintln!("  epic_id={epic_id}, timeout={timeout}, max_failures={max_failures}");
+            let opts = epic::EpicOptions {
+                epic_id,
+                timeout: if timeout != 15 { timeout } else { config.epic.timeout },
+                max_failures: if max_failures != 3 { max_failures } else { config.epic.max_failures },
+                model: config.model.clone(),
+            };
+            if let Err(e) = epic::execute(&config, &repo_root, opts) {
+                eprintln!("error: {e}");
+                std::process::exit(1);
+            }
         }
         Commands::Init => unreachable!(),
         Commands::Summary { log_file } => {

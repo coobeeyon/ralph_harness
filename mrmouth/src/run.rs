@@ -13,6 +13,7 @@ pub struct RunOptions {
     pub model: String,
     pub timeout: Option<u32>,
     pub local: bool,
+    pub prompt_override: Option<String>,
 }
 
 pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<(), RunError> {
@@ -30,7 +31,7 @@ pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<()
     sync_litebrite(repo_root);
 
     // 4. Write the runner entrypoint script to a temp file
-    let runner_script = write_runner_script(repo_root, &opts.model)?;
+    let runner_script = write_runner_script(repo_root, &opts.model, opts.prompt_override.as_deref())?;
 
     // 5. Build Docker image
     let docker = DockerBuilder::new(&config.image);
@@ -233,8 +234,12 @@ fn sync_litebrite(repo_root: &Path) {
 fn write_runner_script(
     repo_root: &Path,
     model: &str,
+    prompt_override: Option<&str>,
 ) -> Result<tempfile::NamedTempFile, RunError> {
-    let prompt_text = prompt::load_prompt(repo_root);
+    let prompt_text = match prompt_override {
+        Some(p) => p.to_string(),
+        None => prompt::load_prompt(repo_root),
+    };
     // Escape single quotes for shell embedding
     let escaped_prompt = prompt_text.replace('\'', "'\\''");
 
