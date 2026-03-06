@@ -485,11 +485,10 @@
       "title": "atty crate is deprecated — use std::io::IsTerminal",
       "description": "run.rs uses atty::is() (line 81) for TTY detection. The atty crate is deprecated in favor of std::io::IsTerminal which landed in Rust 1.70. Since we target stable Rust this should be a straightforward swap — removes a dependency.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 3,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T20:48:56.541609509Z",
-      "updated_at": "2026-03-06T21:06:45.573551748Z"
+      "updated_at": "2026-03-06T21:07:16.629891185Z"
     },
     "lb-yhld": {
       "id": "lb-yhld",
