@@ -533,12 +533,12 @@
     "lb-xdqs": {
       "id": "lb-xdqs",
       "title": "Multi-task sessions: work until context threshold instead of one-task-and-stop",
-      "description": "The current agent prompt enforces ONE task per session. This is wasteful — container startup, cloning, and session init have significant overhead. Change the prompt to instruct the agent to keep working on tasks until it projects the next task would exceed 60% of context window. The agent can estimate this from turn count and volume of code read. The close/sync/push cycle still happens per task, but the session continues. This also affects the decider — it no longer needs to restart a container just because one task finished. Note: compaction kicks in around 80%, so 60% leaves headroom to finish cleanly.",
+      "description": "The current agent prompt enforces ONE task per session. This is wasteful — container startup, cloning, and session init have significant overhead. Change the prompt to instruct the agent to keep working on tasks, selecting ones that fit the remaining context budget. Early in a session, take big implementation tasks. As context fills up, pick smaller tasks (bug fixes, doc updates, cleanups). Stop when no remaining task would fit comfortably under 60% context usage. The agent can estimate this from turn count and volume of code read. The close/sync/push cycle still happens per task, but the session continues. This also affects the decider — it no longer needs to restart a container just because one task finished. Note: compaction kicks in around 80%, so 60% leaves headroom to finish cleanly.",
       "item_type": "task",
       "status": "open",
       "priority": 1,
       "created_at": "2026-03-06T21:42:27.812145167Z",
-      "updated_at": "2026-03-06T21:44:16.290090472Z"
+      "updated_at": "2026-03-06T21:44:52.509268488Z"
     },
     "lb-xn4d": {
       "id": "lb-xn4d",
