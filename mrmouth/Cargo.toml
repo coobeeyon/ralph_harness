@@ -3,6 +3,7 @@ name = "mrmouth"
 version = "0.1.0"
 edition = "2021"
 description = "Run Claude Code as an autonomous coding agent in Docker containers"
+readme = "../README.md"
 license = "MIT"
 repository = "https://github.com/coobeeyon/mrmouth"
 keywords = ["claude", "agent", "docker", "automation"]
