@@ -1,5 +1,6 @@
 mod config;
 mod docker;
+mod init;
 mod prompt;
 mod run;
 pub mod stream_fmt;
@@ -79,7 +80,10 @@ fn main() {
 
     // Init doesn't need config (it creates it)
     if matches!(cli.command, Commands::Init) {
-        eprintln!("mrmouth init: not implemented yet");
+        if let Err(e) = init::execute() {
+            eprintln!("error: {e}");
+            std::process::exit(1);
+        }
         return;
     }
 

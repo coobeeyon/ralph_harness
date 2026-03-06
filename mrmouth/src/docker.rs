@@ -3,7 +3,7 @@ use std::path::Path;
 use std::process::{Child, Command, Stdio};
 
 /// Default Dockerfile content used when no `.mrmouth/Dockerfile` exists.
-const DEFAULT_DOCKERFILE: &str = r#"FROM node:22
+pub const DEFAULT_DOCKERFILE: &str = r#"FROM node:22
 
 # Layer 1: System deps (changes ~never)
 RUN apt-get update && apt-get install -y --no-install-recommends \
