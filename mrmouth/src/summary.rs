@@ -61,7 +61,8 @@ pub fn execute(config: &Config, repo_root: &Path, log_file: &str) -> Result<(), 
             "-p",
             "--model",
             &config.loop_config.summary_model,
-            "--dangerously-skip-permissions",
+            "--allowedTools",
+            "Read, Write",
         ])
         .arg(&prompt)
         .current_dir(repo_root)
