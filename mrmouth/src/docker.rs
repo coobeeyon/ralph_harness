@@ -3,9 +3,11 @@ use std::path::Path;
 use std::process::{Child, Command, Stdio};
 
 /// Default Dockerfile content used when no `.mrmouth/Dockerfile` exists.
-pub const DEFAULT_DOCKERFILE: &str = r#"# Stage 1: Build litebrite (lb) — discarded after build
+pub const DEFAULT_DOCKERFILE: &str = r#"# Stage 1: Build litebrite (lb) — static musl binary, no glibc dependency
 FROM rust:slim AS lb-builder
-RUN cargo install --git https://github.com/coobeeyon/litebrite.git
+RUN apt-get update && apt-get install -y musl-tools && rm -rf /var/lib/apt/lists/*
+RUN rustup target add x86_64-unknown-linux-musl
+RUN cargo install --git https://github.com/coobeeyon/litebrite.git --target x86_64-unknown-linux-musl
 
 # Stage 2: Runtime image — no Rust toolchain
 FROM node:22
