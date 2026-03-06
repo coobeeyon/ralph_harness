@@ -385,11 +385,10 @@
       "title": "Set up GitHub releases and cargo publish for Mr Mouth",
       "description": "Add CI workflow for cross-compiling (linux x86_64, linux aarch64, macOS). Publish binaries as GitHub releases. Set up Cargo.toml for crates.io publish. Follow the same pattern litebrite uses.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:56:14.053377329Z",
-      "updated_at": "2026-03-06T22:53:37.135430152Z"
+      "updated_at": "2026-03-06T22:54:31.441227777Z"
     },
     "lb-ojkd": {
       "id": "lb-ojkd",
