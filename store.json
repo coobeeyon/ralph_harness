@@ -307,8 +307,9 @@
       "item_type": "task",
       "status": "open",
       "priority": 2,
+      "claimed_by": "agent-runner",
       "created_at": "2026-03-06T19:55:37.915785279Z",
-      "updated_at": "2026-03-06T19:57:57.369974806Z"
+      "updated_at": "2026-03-06T20:10:09.315371145Z"
     },
     "lb-p44p": {
       "id": "lb-p44p",
