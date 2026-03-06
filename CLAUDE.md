@@ -2,19 +2,27 @@
 
 ## Critical Rules
 
-1. **ONE task per session.** Not two. Not "just one more." ONE.
-2. **Always close + sync + push before exiting:** `lb close <id>`, `lb sync`, `git push` — in that order.
-3. **You're part of a relay.** The next agent continues where you left off. Exit promptly.
+1. **Work until context fills up.** Do as many tasks as your context allows, but stop before you run out.
+2. **Always close + sync + push per task:** `lb close <id>`, `lb sync`, `git push` — in that order, after each task.
+3. **You're part of a relay.** The next agent continues where you left off. Exit promptly when context is filling up.
 
 ## Workflow
 
 1. Run `lb list` and read `SPEC.md` to understand the current state
 2. Assess what the project needs right now — research, planning, or implementation
 3. If work isn't captured in tasks, create tasks for it. Use epics to group related work. Don't plan everything upfront — future agents will evolve the task graph.
-4. Pick ONE open task, claim it (`lb claim <id>`)
+4. Pick an open task, claim it (`lb claim <id>`)
 5. Read existing code before changing it. Do the task. Create follow-up tasks if you discover more work. Restructure or close tasks if plans change.
 6. Commit frequently. When done, run in order: `lb close <id>`, `lb sync`, `git push`
-7. STOP. Do NOT start another task — exit and let the next agent handle it.
+7. Assess remaining context budget. If you still have capacity, go back to step 4. If context is getting full (~70%), STOP and exit.
+
+## Context Budget
+
+- **Early** (first ~30%): take larger implementation tasks.
+- **Mid-session** (~30-60%): medium tasks — bug fixes, small features.
+- **Late** (>60%): only small, quick tasks.
+- **Stop at ~70%.** Compaction kicks in around 80% — you need headroom to finish cleanly.
+- Estimate usage from: turn count, code volume read, tool calls. 3+ substantial tasks or 20+ turns likely means >60%.
 
 ## Self-Modification
 
