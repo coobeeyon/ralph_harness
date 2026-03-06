@@ -51,16 +51,26 @@ pub fn execute(config: &Config, repo_root: &Path, opts: LoopOptions) -> Result<(
         // Sync litebrite so decider sees fresh task state
         litebrite::sync(repo_root);
 
-        // Generate summary (best-effort)
-        if !opts.no_summary {
-            let log_file = format!("{}/latest.jsonl", config.log_dir);
-            if let Err(e) = summary::execute(config, repo_root, &log_file) {
-                eprintln!("Summary generation failed: {e}");
+        // Run summary and decider in parallel — they're independent
+        let decider_model = config.loop_config.decider_model.clone();
+        let decision = std::thread::scope(|s| {
+            if !opts.no_summary {
+                let log_file = format!("{}/latest.jsonl", config.log_dir);
+                s.spawn(|| {
+                    if let Err(e) = summary::execute(config, repo_root, &log_file) {
+                        eprintln!("Summary generation failed: {e}");
+                    }
+                });
             }
-        }
 
-        // Ask decider whether to continue
-        match should_continue(repo_root, &config.loop_config.decider_model) {
+            let decider_handle = s.spawn(|| {
+                should_continue(repo_root, &decider_model)
+            });
+
+            decider_handle.join().expect("decider thread panicked")
+        });
+
+        match decision {
             Ok(Decision::Continue(reason)) => {
                 eprintln!("Decider: {reason}");
             }
