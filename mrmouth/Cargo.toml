@@ -9,7 +9,6 @@ keywords = ["claude", "agent", "docker", "automation"]
 categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
-atty = "0.2"
 chrono = "0.4"
 clap = { version = "4", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }

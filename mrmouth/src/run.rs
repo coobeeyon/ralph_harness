@@ -1,5 +1,5 @@
 use std::fs::{self, File};
-use std::io::{BufWriter, Write};
+use std::io::{BufWriter, IsTerminal, Write};
 use std::path::Path;
 use std::process::Command;
 
@@ -78,7 +78,7 @@ pub fn execute(config: &Config, repo_root: &Path, opts: RunOptions) -> Result<()
     let log_file = File::create(&log_path)
         .map_err(|e| RunError::Io("creating log file".into(), e))?;
     let mut log_writer = BufWriter::new(log_file);
-    let is_tty = atty::is(atty::Stream::Stdout);
+    let is_tty = std::io::stdout().is_terminal();
 
     if opts.raw {
         handle
