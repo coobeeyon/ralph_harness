@@ -350,6 +350,16 @@
       "created_at": "2026-02-28T18:28:39.294522394Z",
       "updated_at": "2026-02-28T18:28:53.218399258Z"
     },
+    "lb-mnor": {
+      "id": "lb-mnor",
+      "title": "Remove mrmouth/ directory",
+      "description": "Delete the entire mrmouth/ subtree. The code now lives in coobeeyon/mrmouth.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-07T12:56:53.041997252Z",
+      "updated_at": "2026-03-07T12:56:53.041997252Z"
+    },
     "lb-mvv5": {
       "id": "lb-mvv5",
       "title": "Clean up ralph_harness as template-only bash harness",
@@ -985,6 +995,11 @@
     {
       "from_id": "lb-yhld",
       "to_id": "lb-hdke",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-mnor",
+      "to_id": "lb-mvv5",
       "dep_type": "parent"
     }
   ]
