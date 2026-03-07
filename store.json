@@ -266,10 +266,10 @@
       "title": "Mr Mouth: Rust CLI tool",
       "description": "Rewrite ralph as a standalone Rust CLI distributed via cargo install / GitHub releases. ralph becomes an external tool you run from inside any repo. Config lives in the target repo (.ralph/). Single mode: always external. Subcommands: run, loop, epic, init, summary. Replaces the current bash harness entirely.",
       "item_type": "epic",
-      "status": "open",
+      "status": "closed",
       "priority": 2,
       "created_at": "2026-03-06T19:55:08.608835034Z",
-      "updated_at": "2026-03-06T19:57:30.395198875Z"
+      "updated_at": "2026-03-07T13:30:06.091347788Z"
     },
     "lb-iizd": {
       "id": "lb-iizd",
