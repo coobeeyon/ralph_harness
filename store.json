@@ -260,6 +260,16 @@
       "created_at": "2026-03-02T15:19:51.941341849Z",
       "updated_at": "2026-03-02T15:55:42.146372393Z"
     },
+    "lb-iv58": {
+      "id": "lb-iv58",
+      "title": "Remove SPEC.md",
+      "description": "SPEC.md describes mrmouth, not the template harness. Remove it.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-07T12:56:54.726419594Z",
+      "updated_at": "2026-03-07T12:56:54.726419594Z"
+    },
     "lb-j4ge": {
       "id": "lb-j4ge",
       "title": "Create ralph-test-13 test bed",
@@ -1014,6 +1024,11 @@
     },
     {
       "from_id": "lb-m8bx",
+      "to_id": "lb-mvv5",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-iv58",
       "to_id": "lb-mvv5",
       "dep_type": "parent"
     }
