@@ -7,3 +7,4 @@ logs/
 projects/*/.env
 projects/*/logs/
 mrmouth/target/
+# Mr Mouth
