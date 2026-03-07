@@ -297,11 +297,10 @@
       "title": "Remove SPEC.md",
       "description": "SPEC.md describes mrmouth, not the template harness. Remove it.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-07T12:56:54.726419594Z",
-      "updated_at": "2026-03-07T13:29:46.133107288Z"
+      "updated_at": "2026-03-07T13:30:17.813787281Z"
     },
     "lb-j4ge": {
       "id": "lb-j4ge",
