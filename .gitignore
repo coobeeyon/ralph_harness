@@ -4,7 +4,3 @@ logs/
 *.jsonl
 !tests/*.jsonl
 .claude/settings.local.json
-projects/*/.env
-projects/*/logs/
-mrmouth/target/
-# Mr Mouth
