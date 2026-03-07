@@ -99,7 +99,3 @@ The stream formatter (`scripts/stream-fmt.ts`) colorizes output, collapses long 
 | `scripts/runner/run-epic.sh` | Container entrypoint (epic mode) |
 | `.claude/settings.local.json` | Claude Code permissions for the harness |
 | `.env.example` | Credential template |
-
-## Mr Mouth (v2)
-
-Mr Mouth is a Rust CLI that will replace the bash scripts above with a single binary. See `SPEC.md` and `mrmouth/` for details. It's under active development.

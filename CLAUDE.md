@@ -8,7 +8,7 @@
 
 ## Workflow
 
-1. Run `lb list` and read `SPEC.md` to understand the current state
+1. Run `lb list` to understand the current state
 2. Assess what the project needs right now — research, planning, or implementation
 3. If work isn't captured in tasks, create tasks for it. Use epics to group related work. Don't plan everything upfront — future agents will evolve the task graph.
 4. Pick an open task, claim it (`lb claim <id>`)
