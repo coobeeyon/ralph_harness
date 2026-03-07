@@ -620,6 +620,16 @@
       "created_at": "2026-03-06T21:42:27.812145167Z",
       "updated_at": "2026-03-06T22:32:49.159492079Z"
     },
+    "lb-xijr": {
+      "id": "lb-xijr",
+      "title": "Update .gitignore",
+      "description": "Remove the mrmouth/target/ line. Review for any other mrmouth-specific entries.",
+      "item_type": "task",
+      "status": "open",
+      "priority": 1,
+      "created_at": "2026-03-07T12:56:58.881242620Z",
+      "updated_at": "2026-03-07T12:56:58.881242620Z"
+    },
     "lb-xn4d": {
       "id": "lb-xn4d",
       "title": "End-to-end test: external/stealth mode against a real repo",
@@ -1074,6 +1084,11 @@
     },
     {
       "from_id": "lb-4hg9",
+      "to_id": "lb-mvv5",
+      "dep_type": "parent"
+    },
+    {
+      "from_id": "lb-xijr",
       "to_id": "lb-mvv5",
       "dep_type": "parent"
     }
