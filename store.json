@@ -398,11 +398,10 @@
       "title": "Remove mrmouth CI/CD workflows",
       "description": "Delete .github/workflows/ci.yml and .github/workflows/release.yml. Both are mrmouth Rust build/release configs that don't apply to the template repo.",
       "item_type": "task",
-      "status": "open",
+      "status": "closed",
       "priority": 1,
-      "claimed_by": "agent-runner",
       "created_at": "2026-03-07T12:56:53.941436443Z",
-      "updated_at": "2026-03-07T13:29:44.467446525Z"
+      "updated_at": "2026-03-07T13:30:17.792784365Z"
     },
     "lb-mnor": {
       "id": "lb-mnor",
